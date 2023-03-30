@@ -1,0 +1,29 @@
+.App{
+  text-align: center;
+}
+
+.Top_Title h1{
+  color: white;
+  font-size: 41px;
+  margin-bottom: 0px;
+}
+
+.Top_Title a{
+  color: #8ea9bd;
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+input{
+  font-size: 18px;
+  padding: 5px;
+  width: 250px;
+  height: 30px;
+  border-radius: 15px;
+  border-color: none;
+  outline: none;
+}
+
+.Search input{
+  margin-top: 15px;
+}
