@@ -101,7 +101,7 @@ function Movie() {
         <Grid container spacing={4} sx={{ marginX: 'auto', maxWidth: 1400, mt:0.5}}>
                 {searchResults && searchResults.length === 0 ? (
                     <Typography variant="h6" component="p" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', marginTop:5 }}>
-                    No results found.
+                    No results found...
                     </Typography>
                 ) : (
                     searchResults?.map((result: any) => (
