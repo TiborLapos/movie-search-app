@@ -1,22 +1,24 @@
-import React from 'react';
-import './Default.css';
-import { useState } from 'react';
-import Search from './Search'
-import Movie from '../Movie/Search_M'
-import Cards from '../Movie/Cards'
-function App() {
-  const [searchResults, setSearchResults] = useState([]);
-
- 
-  return (
-    <div className="App">
-      <div className='Top_Title'>
-        <h1>Find a Movie</h1>
-        <a>Be sure not to miss a movie today.</a>
-      </div>  
-      <Movie />
-    </div>
-  );
-}
-
-export default App;
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Navigate,
+  } from 'react-router-dom';
+  
+  import Movie from '../Movie/Search_M'
+  import Cards from '../Movie/Cards'
+  import Movie_Search from '../Home/Movie_Search'
+  
+  export default function App() {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/home" element={<Movie_Search />} />
+          <Route path="/card/:id" element={< Cards/>} />
+          <Route path="/" element={<Navigate replace to="/home" />} />
+          <Route path="*" element={<Navigate to ="/" />}/>
+        </Routes>
+      </Router>
+    );
+  }
+  

@@ -1,61 +1,44 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Movie_Search from '../Home/Movie_Search'
 
 
-const cardData = [
-  {
-    id: 1,
-    title: 'Card 1',
-    image: 'https://via.placeholder.com/300x200',
-    description: 'This is the description for card 1',
-  },
-  {
-    id: 2,
-    title: 'Card 2',
-    image: 'https://via.placeholder.com/300x200',
-    description: 'This is the description for card 2',
-  },
-  {
-    id: 3,
-    title: 'Card 3',
-    image: 'https://via.placeholder.com/300x200',
-    description: 'This is the description for card 3',
-  },
-  {
-    id: 4,
-    title: 'Card 4',
-    image: 'https://via.placeholder.com/300x200',
-    description: 'This is the description for card 4',
-  },
-];
 
-function CardGrid() {
+
+function Cards() {
+  const { id } = useParams();
+  const [movie, setMovie] = useState({
+    Title: "",
+    Year: "",
+    imdbRating: ""
+  });
+
+  useEffect(() => {
+    async function fetchMovie() {
+      const response = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=fa90d556`);
+      const data = await response.json();
+      setMovie(data);
+    }
+
+    fetchMovie();
+  }, [id]);
+  
+
+  // Use the `id` value to fetch data, render components, etc.
+  if (!movie) {
+    return <div>Loading...</div>;
+  }
   return (
-    <Grid container spacing={2}>
-      {cardData.map((card) => (
-        <Grid item xs={12} sm={6} md={3} key={card.id}>
-          <Card>
-            <CardMedia
-              component="img"
-              image={card.image}
-              title={card.title}
-            />
-            <CardContent>
-              <Typography variant="h5" component="h2">
-                {card.title}
-              </Typography>
-              <Typography variant="body2" component="p">
-                {card.description}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
+    <>
+    <div>
+      <h1>{id}</h1>
+      <h1>{movie.Title}</h1>
+      <p>Year: {movie.Year}</p>
+      <p>IMDB Rating: {movie.imdbRating}</p>
+   </div>
+    </>
+
   );
 }
 
-export default CardGrid;
+export default Cards;

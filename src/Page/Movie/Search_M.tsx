@@ -8,6 +8,9 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 import { motion } from "framer-motion";
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 import './Movie.css';
 
 interface SearchResult {
@@ -25,10 +28,15 @@ function Movie() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
+
+ 
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -56,7 +64,10 @@ function Movie() {
       }
     }
   };
-
+  const handleCardClick = (imdbID: string) => {
+    console.log(imdbID);
+    navigate('/card/'+imdbID);
+  };
   return (
     <>
    
@@ -107,14 +118,21 @@ function Movie() {
                     </Typography>
                 ) : (
                     searchResults?.map((result: any) => (
-                    
+
                     <Grid item xs={11} sm={11} md={6} lg={4} xl={3} key={result.imdbID} sx={{justifyContent: 'center', marginTop:10}}>
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
+                          whileHover={{
+                            scale: 1.05,
+                            transition: { duration: 0.5 },
+                          }}
                           transition={{ delay: result.id * 0.2, duration: 0.5 }}
                         >
-                        <Card sx={{ height: '100%',backgroundColor:'inherit', color:'white',boxShadow:0}}>
+                        <Card sx={{ height: '100%',backgroundColor:'inherit', color:'white',boxShadow:0}} 
+                          onClick={() => (handleCardClick(result.imdbID)) }
+                          
+                        >
                         {result.Poster === '' || result.Poster === 'N/A' ? (
                             <CardMedia
                             component="img"
