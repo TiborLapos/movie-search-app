@@ -7,10 +7,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
-<<<<<<< HEAD
-=======
 import { motion } from "framer-motion";
->>>>>>> 3616525 (Added Motion Frame to the cards)
 import './Movie.css';
 
 interface SearchResult {
@@ -62,13 +59,9 @@ function Movie() {
 
   return (
     <>
-<<<<<<< HEAD
-     <form onSubmit={handleSubmit} style={{marginTop:15}}>
-=======
    
      <form onSubmit={handleSubmit} style={{marginTop:15}}>
     
->>>>>>> 3616525 (Added Motion Frame to the cards)
         <TextField
             id="search"
             label="Title"
@@ -114,9 +107,6 @@ function Movie() {
                     </Typography>
                 ) : (
                     searchResults?.map((result: any) => (
-<<<<<<< HEAD
-                    <Grid item xs={11} sm={16} md={6} lg={4} xl={3} key={result.imdbID} sx={{justifyContent: 'center', marginTop:10}}>
-=======
                     
                     <Grid item xs={11} sm={16} md={6} lg={4} xl={3} key={result.imdbID} sx={{justifyContent: 'center', marginTop:10}}>
                         <motion.div
@@ -124,7 +114,6 @@ function Movie() {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: result.id * 0.1, duration: 0.5 }}
                         >
->>>>>>> 3616525 (Added Motion Frame to the cards)
                         <Card sx={{ height: '100%',backgroundColor:'inherit', color:'white',boxShadow:0}}>
                         {result.Poster === '' || result.Poster === 'N/A' ? (
                             <CardMedia
@@ -161,10 +150,7 @@ function Movie() {
                             </Typography>
                         </CardContent>
                         </Card>
-<<<<<<< HEAD
-=======
                         </motion.div>
->>>>>>> 3616525 (Added Motion Frame to the cards)
                     </Grid>
                     ))
                 )}
