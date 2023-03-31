@@ -65,13 +65,12 @@ function Movie() {
             InputLabelProps={{
                 style: { color: 'white' },
               }}
-            size="small"
             value={searchTerm}
             className="my_textfield"
             onChange={handleChange}
             color="primary"
             variant="outlined"
-            sx={{ '& .MuiInputBase-input': { color: 'white', width:500, } ,        
+            sx={{marginX: 'auto', width:{xs:'90%', md:500},'& .MuiInputBase-input': { color: 'white'},     
                 '& .MuiOutlinedInput-root': {
                   '& fieldset': {
                     borderColor: 'white',
@@ -98,36 +97,47 @@ function Movie() {
           <CircularProgress color="primary" />
         </div>
         ) :(
-        <Grid container spacing={4} sx={{ marginX: 'auto', maxWidth: 1400, mt:0.5}}>
+        <Grid container spacing={4} sx={{marginX: {xs:'auto',sm: 'auto'}, maxWidth: {xs:400, sm:400, md:800, lg:1100, xl:1400}, mt:0.5}} >
                 {searchResults && searchResults.length === 0 ? (
                     <Typography variant="h6" component="p" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', marginTop:5 }}>
                     No results found...
                     </Typography>
                 ) : (
                     searchResults?.map((result: any) => (
-                    <Grid item xs={12} sm={6} md={3} key={result.imdbID}>
-                        <Card sx={{ height: '100%' }}>
+                    <Grid item xs={11} sm={16} md={6} lg={4} xl={3} key={result.imdbID} sx={{justifyContent: 'center', marginTop:10}}>
+                        <Card sx={{ height: '100%',backgroundColor:'inherit', color:'white',boxShadow:0}}>
                         {result.Poster === '' || result.Poster === 'N/A' ? (
                             <CardMedia
                             component="img"
                             src="https://via.placeholder.com/500x500?text=No+Image+Found"
                             title="No Image Found"
-                            sx={{ width: '100%', height: 500 }}
+                            sx={{ 
+                                width: '100%', 
+                                height: 500,
+                                objectFit: 'cover'
+                            }}
                             />
                         ) : (
                             <CardMedia
                             component="img"
                             image={result.Poster}
                             title={result.Title}
-                            sx={{ width: '100%', height: 500 }}
+                            sx={{ 
+                                width: '100%',
+                                 height: 500,
+                                 objectFit: 'cover'
+                                }}
                             />
                         )}
-                        <CardContent>
-                            <Typography  component="h1" sx={{ height: 50, fontWeight:600}}>
+                        <CardContent sx={{backgroundColor:'inherit', }}>
+                            <Typography  component="h1" sx={{textAlign:'left',height: 50, fontWeight:800}}>
                             {result.Title} - {result.Year}
                             </Typography>
-                            <Typography  component="p" noWrap sx={{ width: 250, overflow: 'hidden', textOverflow: 'ellipsis', textAlign: 'center', fontWeight:100, fontSize:14}}>
-                            {result.Plot}
+                            <Typography  component="p" noWrap sx={{textAlign:'left', width: 'auto',fontWeight:100, fontSize:14}}>
+                            Year: {result.Year}
+                            </Typography>
+                            <Typography  component="p" noWrap sx={{ width: 'auto',height:50, fontWeight:100, fontSize:14}}>
+                            Plot: {result.Plot}
                             </Typography>
                         </CardContent>
                         </Card>
