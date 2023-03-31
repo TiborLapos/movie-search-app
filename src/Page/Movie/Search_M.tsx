@@ -108,11 +108,11 @@ function Movie() {
                 ) : (
                     searchResults?.map((result: any) => (
                     
-                    <Grid item xs={11} sm={16} md={6} lg={4} xl={3} key={result.imdbID} sx={{justifyContent: 'center', marginTop:10}}>
+                    <Grid item xs={11} sm={11} md={6} lg={4} xl={3} key={result.imdbID} sx={{justifyContent: 'center', marginTop:10}}>
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: result.id * 0.1, duration: 0.5 }}
+                          transition={{ delay: result.id * 0.2, duration: 0.5 }}
                         >
                         <Card sx={{ height: '100%',backgroundColor:'inherit', color:'white',boxShadow:0}}>
                         {result.Poster === '' || result.Poster === 'N/A' ? (
