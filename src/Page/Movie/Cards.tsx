@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Movie_Search from '../Home/Movie_Search'
-
+import API from '../../Api/Api';
 
 
 
@@ -15,7 +15,7 @@ function Cards() {
 
   useEffect(() => {
     async function fetchMovie() {
-      const response = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=fa90d556`);
+      const response = await fetch(`https://www.omdbapi.com/?i=${API.IMDB_ID}&apikey=${API.API_KEY}`);
       const data = await response.json();
       setMovie(data);
     }
@@ -30,6 +30,7 @@ function Cards() {
   }
   return (
     <>
+    
     <div>
       <h1>{id}</h1>
       <h1>{movie.Title}</h1>

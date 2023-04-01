@@ -10,7 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-
+import API from '../../Api/Api';
 import './Movie.css';
 
 interface SearchResult {
@@ -46,12 +46,12 @@ function Movie() {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `https://www.omdbapi.com/?apikey=fa90d556&s=${searchTerm}&type=movie`
+          `https://www.omdbapi.com/?apikey=${API.API_KEY}&s=${searchTerm}&type=movie`
         );
         const movies = await Promise.all(
           response.data.Search.map(async (searchResult: SearchResult) => {
             const plotResponse = await axios.get(
-              `https://www.omdbapi.com/?apikey=fa90d556&i=${searchResult.imdbID}&plot=short`
+              `https://www.omdbapi.com/?apikey=${API.API_KEY}&i=${searchResult.imdbID}&plot=short`
             );
             return { ...searchResult, Plot: plotResponse.data.Plot };
           })
@@ -64,6 +64,7 @@ function Movie() {
       }
     }
   };
+  
   const handleCardClick = (imdbID: string) => {
     console.log(imdbID);
     navigate('/card/'+imdbID);
