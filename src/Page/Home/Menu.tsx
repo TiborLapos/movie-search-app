@@ -25,7 +25,6 @@ const styles = {
         marginLeft:5,
         },
       firstLetter: {
-        fontFamily: 'Montserrat, sans-serif',
         fontWeight: 800,
         color: '#f44336',
         fontSize: '2.5rem',
@@ -40,7 +39,6 @@ const styles = {
         color: '#fff',
         margin: '0 0px',
         fontWeight: 600,
-        fontFamily: 'Montserrat, sans-serif',
         textTransform: 'uppercase',
         letterSpacing: '0.1rem',
         fontSize: '0.9rem',

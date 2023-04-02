@@ -19,9 +19,9 @@ function Movie_Search() {
   return (
     <>
       <Menu/>
+      <LatestMovie/>
       <SearchBar onSearch={handleSearch} /> 
       <Movie searchTerm={searchTerm}/>
-      <LatestMovie/>
     </>
   );
  
