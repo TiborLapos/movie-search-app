@@ -56,9 +56,8 @@ export default function LatestMovie() {
     <Box
       sx={{
         position: 'relative',
-        backgroundColor: 'rgba(8, 27, 39, 0.2)',
         p: 2,
-        minheight:'100%'
+        he:'600px'
       }}
     >
       <Box
@@ -67,13 +66,14 @@ export default function LatestMovie() {
           top: 0,
           left: 0,
           width: '100%',
-          height: '100%',
+          height: '600px',
           backgroundImage: `url(${require('../../img/background.jpg')})`,
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center center',
           backgroundSize: 'cover',
           filter: 'blur(5px)',
           opacity: 0.6,
+          backgroundColor: 'rgba(8, 27, 39, 0.2)',
           zIndex: -1,
         }}
       />

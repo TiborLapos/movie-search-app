@@ -7,8 +7,9 @@ import {
   
   import Movie from '../Movie/Search_Movie'
   import Cards from '../Movie/Cards'
-  import Movie_Search from '../Home/Movie_Search'
-  import Test from '../Movie/Test'
+  import Movie_Search from './Home'
+  import Test from '../Movie/LatestMovie'
+  import SearchBar from '../Movie/SearchBar';
 
   export default function App() {
     return (
