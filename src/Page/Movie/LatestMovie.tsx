@@ -77,8 +77,8 @@ export default function LatestMovie() {
           zIndex: -1,
         }}
       />
-      <Container maxWidth="lg">
-        <Grid container spacing={2}>
+      <Container maxWidth="lg" >
+        <Grid container spacing={2}  sx={{marginTop:3}}>
           <Grid item xs={12} sm={4}>
             <Box
               sx={{

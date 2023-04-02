@@ -1,8 +1,9 @@
 import './Default.css';
 import Movie from '../Movie/Search_Movie'
-import Test from '../Movie/LatestMovie'
+import LatestMovie from '../Movie/LatestMovie'
 import SearchBar from '../Movie/SearchBar';
 import React, { useState, useEffect } from 'react';
+import Menu from './Menu';
 
 
 function Movie_Search() {
@@ -11,13 +12,17 @@ function Movie_Search() {
     setSearchTerm(value);
   };
 
-  
+
+
+
 
   return (
-    <div>
-      <SearchBar onSearch={handleSearch} />
+    <>
+      <Menu/>
+      <SearchBar onSearch={handleSearch} /> 
       <Movie searchTerm={searchTerm}/>
-    </div>
+      <LatestMovie/>
+    </>
   );
  
 }

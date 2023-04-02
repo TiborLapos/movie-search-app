@@ -6,6 +6,25 @@ interface Props {
   onSearch: (searchTerm: string) => void;
 }
 
+const styles = {
+    menu:{
+        marginX: 'auto',
+        width: { xs: '90%', md: 500 },
+        '& .MuiInputBase-input': { color: 'white' },
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: 'white',
+          },
+          '&:hover fieldset': {
+            borderColor: 'white',
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: 'white',
+          },
+        },
+    }
+  };
+
 const SearchBar: React.FC<Props> = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -36,22 +55,7 @@ const SearchBar: React.FC<Props> = ({ onSearch }) => {
         onChange={handleChange}
         color="primary"
         variant="outlined"
-        sx={{
-          marginX: 'auto',
-          width: { xs: '90%', md: 500 },
-          '& .MuiInputBase-input': { color: 'white' },
-          '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-              borderColor: 'white',
-            },
-            '&:hover fieldset': {
-              borderColor: 'white',
-            },
-            '&.Mui-focused fieldset': {
-              borderColor: 'white',
-            },
-          },
-        }}
+        sx={styles.menu}
       />
     </form>
   );
