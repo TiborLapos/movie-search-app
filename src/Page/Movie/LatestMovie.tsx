@@ -63,7 +63,7 @@ const styles = {
   },
   blueButton: {
     fontFamily: 'Roboto, sans-serif',
-    backgroundColor: '#2196f3',
+    backgroundColor: '#00A1FF',
     borderRadius: '10px',
     color: '#fff',
     fontSize: '1rem',

@@ -31,7 +31,8 @@ const styles = {
         },
         marginTop:5,
         alignItem:'center',
-    }
+    },
+
   };
 
 const SearchBar: React.FC<Props> = ({ onSearch }) => {
@@ -67,7 +68,6 @@ const SearchBar: React.FC<Props> = ({ onSearch }) => {
             variant="outlined"
             sx={styles.searchbar}
           />
-        
         </form>
       </Box>
   );

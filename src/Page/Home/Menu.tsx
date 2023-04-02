@@ -1,7 +1,8 @@
 import React from 'react';
-import { AppBar, Box, Button, Toolbar, Typography, IconButton, MenuItem } from '@mui/material';
+import { AppBar, Box, Button, Toolbar, Typography, IconButton, MenuItem} from '@mui/material';
 import { Menu as ShowMenu} from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
+import { useMediaQuery, createTheme } from '@mui/material';
 import '@fontsource/roboto';
 
 const styles = {
@@ -51,10 +52,19 @@ const styles = {
   },
   menuIcon: {
     color: '#fff',
-  }
+    marginLeft: 'auto',
+  },
+  menuList: {
+    background: '#081b27',
+    color:'white',
+  },
 };
 
 export default function Menu() {
+  const theme = createTheme();
+  const isXsScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event:any) => {
@@ -65,49 +75,73 @@ export default function Menu() {
     setAnchorEl(null);
   };
 
+  console.log(isXsScreen)
+  const renderMenuButton = () => {
+    if (isXsScreen) {
+      return (
+        <IconButton
+          size="large"
+          aria-controls="menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+          sx={styles.menuIcon}
+        >
+          <MenuIcon  />
+        </IconButton>
+      );
+    } else {
+      return (
+        <Box sx={styles.button_box}>
+          <Button color="inherit" sx={styles.button}>
+            Home
+          </Button>
+          <Button color="inherit" sx={styles.button}>
+            Movies
+          </Button>
+          <Button color="inherit" sx={styles.button}>
+            IMDB
+          </Button>
+        </Box>
+      );
+    }
+  };
+
   return (
     <Box sx={styles.root} >
       <AppBar position="static" sx={styles.appBar}>
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Toolbar sx={{ justifyContent: 'center' }}>
           <Typography variant="h5" textAlign="center" sx={styles.logo}>
             <span style={styles.firstLetter}>
               <span style={styles.firstLetterShadow}>M</span>
             </span>
             <span style={styles.logo_letter}>ovie Website</span>
           </Typography>
-          <Box sx={styles.button_box}>
-            <IconButton
-              size="large"
-              aria-controls="menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-              sx={styles.menuIcon}
-            >
-              <MenuIcon />
-            </IconButton>
-            <ShowMenu
-              id="menu"
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>
-                <Button color="inherit" sx={styles.button}>
-                  Home
-                </Button>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Button color="inherit" sx={styles.button}>
-                  Movies
-                </Button>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Button color="inherit" sx={styles.button}>
-                  IMDB
-                </Button>
-              </MenuItem>
-            </ShowMenu>
-          </Box>
+          {renderMenuButton()}
+          <ShowMenu
+            id="menu"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+            PaperProps={{ style: { backgroundColor: "#081b27" } }}
+            sx={{ "& .MuiList-root": styles.menuList }}
+          >
+            <MenuItem onClick={handleClose} >
+              <Button color="inherit" sx={{ ...styles.button, color: '#fff' }}>
+                Home
+              </Button>
+            </MenuItem>
+            <MenuItem onClick={handleClose} >
+              <Button color="inherit" sx={{ ...styles.button, color: '#fff' }}>
+                Movies
+              </Button>
+            </MenuItem>
+            <MenuItem onClick={handleClose} >
+              <Button color="inherit" sx={{ ...styles.button, color: '#fff' }}>
+                IMDB
+              </Button>
+            </MenuItem>
+          </ShowMenu>
+
         </Toolbar>
       </AppBar>
     </Box>

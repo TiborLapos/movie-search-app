@@ -92,8 +92,7 @@ function Movie({ searchTerm }: Props) {
                     </Typography>
                 ) : (
                     searchResults.map((result: any) => (
-
-                    <Grid item xs={11} sm={11} md={6} lg={4} xl={3} key={result.imdbID} sx={{justifyContent: 'center', marginTop:10}}>
+                    <Grid item xs={11} sm={11} md={6} lg={4} xl={3} key={result.imdbID} sx={{justifyContent: 'center', marginTop:2}}>
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
