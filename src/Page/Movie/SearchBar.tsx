@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import API from '../../Api/Api';
+import { Button, Box} from '@mui/material';
 
 interface Props {
   onSearch: (searchTerm: string) => void;
 }
 
 const styles = {
-    menu:{
+  wrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '0 auto',
+  },
+  searchbar:{
         marginX: 'auto',
-        width: { xs: '90%', md: 500 },
+        width: { xs: 350, md: 500 },
         '& .MuiInputBase-input': { color: 'white' },
         '& .MuiOutlinedInput-root': {
           '& fieldset': {
@@ -22,6 +29,8 @@ const styles = {
             borderColor: 'white',
           },
         },
+        marginTop:5,
+        alignItem:'center',
     }
   };
 
@@ -43,21 +52,24 @@ const SearchBar: React.FC<Props> = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        id="search"
-        label="Title"
-        InputLabelProps={{
-          style: { color: 'white' },
-        }}
-        value={searchTerm}
-        className="my_textfield"
-        onChange={handleChange}
-        color="primary"
-        variant="outlined"
-        sx={styles.menu}
-      />
-    </form>
+      <Box sx={styles.wrapper}>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            id="search"
+            label="Enter the Movie Title"
+            InputLabelProps={{
+              style: { color: 'white' },
+            }}
+            value={searchTerm}
+            className="my_textfield"
+            onChange={handleChange}
+            color="primary"
+            variant="outlined"
+            sx={styles.searchbar}
+          />
+        
+        </form>
+      </Box>
   );
 };
 

@@ -5,7 +5,7 @@ import Api from '../../Api/Api';
 import '@fontsource/roboto';
 import { Button } from '@mui/material';
 
-
+//set velues for the Movie
 interface Movie {
   Title: string;
   Year: string;
@@ -16,6 +16,8 @@ interface Movie {
   Poster: string;
   Actors: string;
 }
+
+//To change the stile
 const styles = {
   root_box_bacground: {
     backgroundImage: `url(${require('../../img/background.jpg')})`,
@@ -23,7 +25,7 @@ const styles = {
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
     position: 'relative',
-    height: '60vh',
+    height: { xs: '75vh', sm: 'calc(65vh - 64px)' },
     maxWidth: '100vw',
     overflow: 'hidden',
   },
@@ -59,9 +61,6 @@ const styles = {
     letterSpacing: '0.1rem',
     fontWeight:800,
   },
-  directed:{
-
-  },
   blueButton: {
     fontFamily: 'Roboto, sans-serif',
     backgroundColor: '#2196f3',
@@ -79,6 +78,8 @@ const styles = {
 export default function LatestMovie() {
   const [latestMovie, setLatestMovie] = useState<Movie[] | null>(null);
 
+
+  //Show the movies by IMDB ID and change evry 4000ms
   useEffect(() => {
     const ids = ['tt10366206', 'tt10151854', 'tt13345606', 'tt0111161'];
     let index = 0;
@@ -101,6 +102,7 @@ export default function LatestMovie() {
     return () => clearInterval(timer);
   }, []);
 
+  //If no movie than load
   if (!latestMovie) {
     return <Box>Loading...</Box>;
   }
@@ -119,7 +121,7 @@ export default function LatestMovie() {
             transition={{ delay: 0.3, duration: 0.6 }}
             style={{ overflow: "hidden", position: "absolute"}}
           >
-            <Grid container spacing={3} sx={{ marginTop: 3, justifyContent: 'center' }}>
+            <Grid container spacing={3} sx={{ marginTop: 1, justifyContent: 'center' }}>
               <Grid item xs={12} sm={4}>
                 <Box sx={styles.box_photo}>
                   <img
@@ -131,24 +133,24 @@ export default function LatestMovie() {
               </Grid>
               <Grid item xs={12} sm={5}>
                 <Box sx={{ ...styles.box_text, maxWidth: '1000px' }}>
-                    <Typography variant="h4" gutterBottom sx={styles.title}>
+                    <Typography variant="h4" gutterBottom sx={{ ...styles.title, textAlign:{xs:'center',sm:'left'}}}>
                       {movie.Title} ({movie.Year})
                     </Typography>
-                    <Typography variant="subtitle1" gutterBottom >
+                    <Typography variant="subtitle1" gutterBottom sx={{ display: { xs: 'none', sm: 'block' }}}>
                       <span style={{
                         fontFamily: 'Roboto, sans-serif',
                         fontSize: '1rem',
                         letterSpacing: '0.1rem',
                         fontWeight:'bold'}}>Directed by: </span>{movie.Director}
                     </Typography>
-                    <Typography variant="body1" gutterBottom >
+                    <Typography variant="body1" gutterBottom sx={{ display: { xs: 'none', sm: 'block' } }}>
                       <span style={{
                         fontFamily: 'Roboto, sans-serif',
                         fontSize: '1rem',
                         letterSpacing: '0.1rem',
                         fontWeight:'bold'}}>Plot: </span>{movie.Plot}
                     </Typography>
-                    <Typography variant="subtitle2" gutterBottom>
+                    <Typography variant="subtitle2" gutterBottom sx={{ display: { xs: 'none', sm: 'block' } }}>
                       <span style={{
                         fontFamily: 'Roboto, sans-serif',
                         fontSize: '1rem',
@@ -156,7 +158,7 @@ export default function LatestMovie() {
                         fontWeight:'bold',}}  
                       >Starring: </span>{movie.Actors}
                     </Typography>
-                    <Box sx={{  justifyContent: 'left', marginTop: '20px' }}>
+                    <Box sx={{  justifyContent: 'left', marginTop: '20px', display: { xs: 'none', sm: 'block' }  }}>
                       <Button variant="contained" sx={styles.blueButton}>
                         More
                       </Button>
