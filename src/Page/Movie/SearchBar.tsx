@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import API from '../../Api/Api';
-import { Button, Box} from '@mui/material';
+import {Box} from '@mui/material';
 
 interface Props {
   onSearch: (searchTerm: string) => void;

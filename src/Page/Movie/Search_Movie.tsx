@@ -5,11 +5,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import API from '../../Api/Api';
 
 interface SearchResult {
@@ -17,27 +15,21 @@ interface SearchResult {
   Poster: string;
   Title: string;
   Year: string;
-}
-
-interface Movie extends SearchResult {
   Plot: string;
 }
+
+
 
 interface Props {
   searchTerm?: string;
 }
 
 function Movie({ searchTerm }: Props) {
-  const [searchResults, setSearchResults] = useState<Movie[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
 
-  useEffect(() => {
-    if (searchTerm) {
-      handleSubmit();
-    }
-  }, [searchTerm]);
+ 
 
   const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     if (event) {
@@ -64,6 +56,13 @@ function Movie({ searchTerm }: Props) {
       setSearchResults([]);
     }
   };
+
+  useEffect(() => {
+    if (searchTerm) {
+      handleSubmit();
+    }
+    // eslint-disable-next-line
+  }, [searchTerm]);
 
   const handleCardClick = (imdbID: string) => {
     console.log(imdbID);

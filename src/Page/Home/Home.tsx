@@ -2,11 +2,11 @@ import './Default.css';
 import Movie from '../Movie/Search_Movie'
 import LatestMovie from '../Movie/LatestMovie'
 import SearchBar from '../Movie/SearchBar';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Menu from './Menu';
 
 
-function Movie_Search() {
+function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearch = (value:any) => {
     setSearchTerm(value);
@@ -27,6 +27,6 @@ function Movie_Search() {
  
 }
 
-export default Movie_Search;
+export default Home;
 
 
