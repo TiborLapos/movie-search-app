@@ -42,7 +42,6 @@ const styles = {
     filter: 'blur(0.1px)',
     opacity: 0.9,
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
-
   },
   box_photo: {
     display: 'flex',

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Box, CardMedia, Grid, Typography,Card,CardContent,CircularProgress} from "@mui/material";
+import { Box, CardMedia, Grid, Typography,Card,CardContent,CircularProgress,Container} from "@mui/material";
 import API from '../../../Api/Api';
 import '@fontsource/roboto'; // import the font
 import Test from './Card_menu'
@@ -34,6 +34,26 @@ const style = {
     height: '100vh',
     marginTop: 5,
     fontFamily: 'Roboto',
+  },
+  root_box_bacground: {
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center center',
+    backgroundSize: 'cover',
+    position: 'relative',
+    height: "100vh",
+    maxWidth: '100vw',
+    overflow: 'hidden',
+  },
+  root_box__effect: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 0,
+    backdropFilter: 'blur(20px)',
+    opacity: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   card_root: {
     display: 'flex',
@@ -71,7 +91,6 @@ const style = {
     marginRight: 'auto',
   }
 };
-
 function Cards() {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<SearchResult | null>(null);
@@ -103,14 +122,18 @@ function Cards() {
   const rating = parseInt(movie.imdbRating);
 
   return (
+    <Box sx={{...style.root_box_bacground,     backgroundImage: `url(${movie.Poster}})`,}} >
+    <Box sx={style.root_box__effect}/>
   <Grid container justifyContent="center" sx={style.root}>
     <Card sx={style.card_root}>
 
-        <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}>
+        <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}             style={{ overflow: "hidden", position: "relative"}}
+>
           <CardMedia component="img" sx={style.image} image={movie.Poster} alt={movie.Title} />
         </motion.div>
 
-      <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}  transition={{ delay: 0.3, duration: 0.6 }}>
+      <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}  transition={{ delay: 0.3, duration: 0.6 }}             style={{ overflow: "hidden", position: "relative"}}
+>
         <CardContent sx={style.cardcontainer_root}>
           <Grid container direction="column" spacing={2} >
             <Grid container spacing={1} justifyContent="space-between" >
@@ -154,7 +177,9 @@ function Cards() {
 
     </Card>
   </Grid>
+  </Box>
   );
 };
 
 export default Cards;
+
