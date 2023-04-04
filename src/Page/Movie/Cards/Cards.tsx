@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Box, CardMedia, Grid, Typography,Card,Rating,Chip,Divider} from "@mui/material";
+import { Box, CardMedia, Grid, Typography,Card,Rating,Chip,CardContent,Divider} from "@mui/material";
 import API from '../../../Api/Api';
 import '@fontsource/roboto'; // import the font
+import Test from './Test'
+import { color } from 'framer-motion';
 
 interface SearchResult {
   imdbID: string;
@@ -18,34 +20,8 @@ interface SearchResult {
   Actors:string;
 }
 
-const style = {
-  root: {
-    maxWidth: '100%',
-    maxHeight: '100vh',
-    margin: '0 auto',
-    backgroundColor:'#091e2a',
-    color:'white',
-    padding:'1rem', 
-    marginTop:5,
-    fontFamily: 'Roboto',
 
-  },
-  photo_box: {
-    position: 'relative',
-    marginLeft:10,
-  },
-  posterContainer: {
-    position: 'relative',
-  },
-  poster: {
-    height:'70vh',
-    maxWidth: '100vw',
-    objectFit: "contain"
-
-  },
-  textContainer: {
-    padding: '1rem',
-  },
+/*
   chip: {
     position: 'absolute',
     bottom: '0',
@@ -56,16 +32,47 @@ const style = {
     fontWeight: 'bold',
     zIndex: 1,
   },
+*/
+
+
+const style = {
+  root:{
+    height: '100vh',
+    marginTop:5,
+    fontFamily: 'Roboto',
+  },
+  card_root:{
+    display: 'flex',
+    justifyContent: 'center',
+    width: '60%',
+    height: '100vh',
+    backgroundColor:'inherit',
+    color:'white',
+  },
+  image:{
+    height: '70vh',
+     width: 'auto',
+     objectFit: "contain",
+     borderRadius: '16px' 
+
+  },
+  card_content:{
+    marginRight: '30px' 
+  },
   movie_info:{
     color:'#737373',
-  }
-};
+    marginLeft:2,
+    marginTop:'5px'
+  },
+
+
+}
+
 
 
 function Cards() {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<SearchResult | null>(null);
-
   useEffect(() => {
     async function fetchMovie() {
       const response = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=${API.API_KEY}`);
@@ -81,41 +88,40 @@ function Cards() {
   }
   const rating = parseInt(movie.imdbRating);
   return (
-    <Box>
-    <Card sx={style.root}>
-      <Grid container >
-        <Grid item xs={12} sm={7} sx={style.posterContainer}>
-          <Box sx={style.photo_box}>
-            <CardMedia
-              component="img"
-              image={movie.Poster}
-              title={movie.Title}
-              sx={style.poster}
-            />
-            <Chip label={movie.Genre} sx={style.chip} />
-          </Box>
-        </Grid>
-        <Grid item xs={12} sm={5} sx={style.textContainer}>
-          <Box sx={{marginLeft: '-10rem',}}>
-          <Typography variant="h2" align="left"  sx={{fontWeight:900}}>{movie.Title}</Typography>
-          <Grid container spacing={1} sx={style.movie_info}>
-            <Grid item>
-              <Typography variant="body1">{movie.Year}  |</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="body1">{movie.Runtime} |</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="body1">{movie.Rated}</Typography>
-            </Grid>
+    <Grid
+    container
+    justifyContent="center"
+    sx={style.root}
+    >
+    <Card sx={style.card_root}>
+      <CardMedia
+        component="img"
+        sx={style.image}
+        image={movie.Poster}
+        alt={movie.Title}
+      />
+      <CardContent sx={{ marginLeft: '30px' }}>
+        <Grid container direction="column" spacing={2}>
+          <Grid item>
+            <Typography variant="h3" align="left"  sx={{fontWeight:900}}>{movie.Title}</Typography>
           </Grid>
-            
-
-          </Box>
+          <Grid container spacing={1} sx={style.movie_info} >
+              <Grid item>
+                <Typography variant="body1">{movie.Year}  |</Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="body1">{movie.Runtime} |</Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="body1">{movie.Rated}</Typography>
+              </Grid>
+            </Grid>
+            <Test/>
+           
         </Grid>
-      </Grid>
+      </CardContent>
     </Card>
-  </Box>
+  </Grid>
   );
 };
 
@@ -136,5 +142,41 @@ export default Cards;
               precision={0.5}
               readOnly
             />
+
+
+
+
+                <Box>
+    <Card sx={style.root}>
+      <Grid container >
+        <Grid item xs={12} sm={7} sx={style.posterContainer}>
+          <Box sx={style.photo_box}>
+            <CardMedia
+              component="img"
+              image={movie.Poster}
+              title={movie.Title}
+              sx={style.poster}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} sm={5} sx={style.textContainer}>
+          <Box>
+            <Typography variant="h3" align="left"  sx={{fontWeight:900}}>{movie.Title}</Typography>
+            <Grid container spacing={1} sx={style.movie_info}>
+              <Grid item>
+                <Typography variant="body1">{movie.Year}  |</Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="body1">{movie.Runtime} |</Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="body1">{movie.Rated}</Typography>
+              </Grid>
+            </Grid>
+          </Box>
+        </Grid>
+      </Grid>
+    </Card>
+  </Box>
 
 */

@@ -5,7 +5,7 @@ import {
   } from 'react-router-dom';
   import Cards from './Movie/Cards/Cards'
   import Home from './Home/Home'
-  import Test from './Movie/Slider/LatestMovie'
+  import Test from './Movie/Cards/Test'
   import MovieList from './Movie/Caategory'
   import Menu from './Home/Menu';
   import { createTheme, ThemeProvider } from '@mui/material';
