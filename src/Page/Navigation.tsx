@@ -3,7 +3,7 @@ import {
     Route,
     Navigate,
   } from 'react-router-dom';
-  import Cards from './Movie/Cards'
+  import Cards from './Movie/Cards/Cards'
   import Home from './Home/Home'
   import Test from './Movie/Slider/LatestMovie'
   import MovieList from './Movie/Caategory'
