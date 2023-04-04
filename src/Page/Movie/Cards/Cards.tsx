@@ -44,27 +44,27 @@ const style = {
   card_root: {
     display: 'flex',
     justifyContent: 'center',
-    width: { xs: "100%", sm: "100%" },
-    flexDirection: { xs: 'column', sm: 'row' },
+    width: { xs: "100%", md: "100%" },
+    flexDirection: { xs: 'column', md: 'row' },
     backgroundColor: 'inherit',
     color: 'white',
   },
   image: {
-    height: { xs: "90%", sm: "70vh" },
-    width: { xs: "100%", sm: "auto" },
+    height: { xs: "90%", md: "70vh" },
+    width: { xs: "100%", md: "auto" },
     objectFit: 'contain',
-    borderRadius: {xs:'20px', sm:'16px'},
+    borderRadius: {xs:'20px', md:'16px'},
   },
   card_content: {
-    marginLeft: { xs: '0', sm: '30px' },
-    marginTop: { xs: '5px', sm: '0' },
+    marginLeft: { xs: '0', md: '30px' },
+    marginTop: { xs: '5px', md: '0' },
   },
   movie_info: {
     color: '#737373',
-    marginTop: '5px',
+    marginTop: {xs:"-35px", md:'5px'},
   },
   cardcontainer_root:{
-    marginTop:{xs:"-55px", sm:"0px"}
+    marginTop:{xs:"-55px", md:"0px"}
   },
   text_design_margin:{
     marginLeft:{xs:'30px'}
@@ -72,43 +72,11 @@ const style = {
   text_design_rating:{ 
     fontWeight: 900,
     fontSize: 30,
-    display: 'flex', 
-    alignItems: 'center',
+    display: {xs:"block",md:'flex'}, 
+    alignItems: 'right',
     marginRight: 'auto',
   }
 };
-
-
-/*
-const style = {
-  root: {
-    height: '100vh',
-    marginTop: 5,
-    fontFamily: 'Roboto',
-  },
-  card_root: {
-    display: 'flex',
-    justifyContent: 'center',
-    width: {xs:"100%", sm:"100%"},
-    height: '100vh',
-    backgroundColor: 'inherit',
-    color: 'white',
-  },
-  image: {
-    height: {xs:"100vh", sm:"70vh"},
-    width: {xs:"auto", sm:"auto"},
-    objectFit: 'contain',
-    borderRadius: '16px',
-  },
-  card_content: {
-    marginRight: '30px',
-  },
-  movie_info: {
-    color: '#737373',
-    marginTop: '5px',
-  },
-};
-*/
 
 function Cards() {
   const { id } = useParams<{ id: string }>();
@@ -152,23 +120,23 @@ function Cards() {
         <CardContent sx={style.cardcontainer_root}>
           <Grid container direction="column" spacing={2} >
             <Grid container spacing={1} justifyContent="space-between" >
-              <Grid item sx={{...style.text_design_margin, width:{xs:"100%", sm:"auto"}}}>
+              <Grid item sx={{...style.text_design_margin, width:{xs:"100%", md:"auto"}}}>
                 <Typography variant="h3" align="center" sx={{fontWeight: 900 , }}>
                   {movie.Title}
                 </Typography>
               </Grid>
-              <Grid item sx={{display: {xs:"block", sm:'flex'}, alignItems: 'right', width:{xs:"100%", sm:"auto"}}}>
-                <Typography variant="h3" sx={{textAlign:"right",}}>
+              <Grid item sx={{display: {xs:"block", md:'flex'}, alignItems: 'right', width:{xs:"100%", md:"auto"}}}>
+                <Typography variant="h3" sx={{...style.text_design_rating, textAlign:"right"}}>
                   {movie.imdbRating}
                 <StarIcon sx={{ color: yellow[500], fontSize: 30 }} />
                 </Typography>
               </Grid>
             </Grid>
 
-            <Grid container spacing={1} sx={{...style.movie_info}} >
+            <Grid container spacing={1} sx={style.movie_info} >
                 <Grid item sx={style.text_design_margin}>
                   <Typography variant="body1">{movie.Year}  |</Typography>
-                </Grid>
+                </Grid> 
                 <Grid item>
                   <Typography variant="body1">{movie.Runtime} |</Typography>
                 </Grid>
