@@ -131,7 +131,7 @@ function Cards() {
                 <Typography variant="body1">{movie.Rated}</Typography>
               </Grid>
             </Grid>
-            <Test/>
+            <Test Plot={movie.Plot}/>
            
         </Grid>
       </CardContent>

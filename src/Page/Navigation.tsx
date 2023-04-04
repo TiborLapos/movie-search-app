@@ -22,7 +22,6 @@ import {
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/card/:id" element={< Cards/>} />
-            <Route path="/test" element={< Test/>} />
             <Route path="/category" element={< MovieList/>} />
             <Route path="/" element={<Navigate replace to="/home" />} />
             <Route path="*" element={<Navigate to ="/" />}/>

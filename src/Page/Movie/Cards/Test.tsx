@@ -2,10 +2,8 @@ import { useState } from 'react';
 import { CardContent, Grid, Typography, Divider, Box } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
 
-const OverviewContent = (
-  <Typography variant="body1">
-    This is the overview content.
-  </Typography>
+const OverviewContent = ({ Plot }: { Plot: string }) => (
+  <Typography variant="body1" >{Plot}</Typography>
 );
 
 const TrailerContent = (
@@ -21,10 +19,10 @@ const MoreLikeThisContent = (
 );
 
 const DetailsContent = (
-  <Typography variant="body1">
-    This is the details content.
-  </Typography>
+  <Typography variant="body1">This is the details content.</Typography>
 );
+
+
 
 const style = {
   text: {
@@ -54,9 +52,18 @@ const style = {
   },
 };
 
-const MovieCard = () => {
-  const [selectedContent, setSelectedContent] = useState(OverviewContent);
-  const [activeIndex, setActiveIndex] = useState(0);
+type MovieCardProps = {
+    Plot: string;
+  };
+  
+
+const MovieCard = ({ Plot }: MovieCardProps) => {
+    const [selectedContent, setSelectedContent] = useState(
+        <OverviewContent Plot={Plot} />
+      );
+    const [activeIndex, setActiveIndex] = useState(0);
+  
+
 
   const handleContentChange = (content:any, index:any) => {
     setSelectedContent(
@@ -77,13 +84,13 @@ const MovieCard = () => {
   };
 
   return (
-    <CardContent>
+    <CardContent sx={{width:600, marginTop:5,}}>
       <Grid container spacing={2} alignItems="center">
         <Grid item sx={{ flexGrow: 1 }}>
           <Typography
             sx={activeIndex === 0 ? style.activeText : style.text}
             variant="subtitle1"
-            onClick={() => handleContentChange(OverviewContent, 0)}
+            onClick={() => handleContentChange(<OverviewContent Plot={Plot} />, 0)}
           >
             Overview
             {activeIndex === 0 && <Box sx={style.underline} />}
@@ -123,7 +130,7 @@ const MovieCard = () => {
       <Box sx={{ my: 1, width: 'auto' }}>
         <Divider sx={{ backgroundColor: '#737373',}} />
       </Box>
-      <div style={{ marginTop: 16 }}>{selectedContent}</div>
+      <div style={{ marginTop: 16}}>{selectedContent}</div>
     </CardContent>
   );
 };
