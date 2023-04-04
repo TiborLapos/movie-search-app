@@ -1,9 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Box, CardMedia, Grid, Typography,Card,Rating,Chip} from "@mui/material";
+import { Box, CardMedia, Grid, Typography,Card,Rating,Chip,Divider} from "@mui/material";
 import API from '../../../Api/Api';
 import '@fontsource/roboto'; // import the font
-
 
 interface SearchResult {
   imdbID: string;
@@ -57,6 +56,9 @@ const style = {
     fontWeight: 'bold',
     zIndex: 1,
   },
+  movie_info:{
+    color:'#737373',
+  }
 };
 
 
@@ -94,10 +96,35 @@ function Cards() {
           </Box>
         </Grid>
         <Grid item xs={12} sm={5} sx={style.textContainer}>
-          <Box sx={{marginLeft: '-10rem',    fontFamily: 'Roboto', fontWeight:900}}>
-            <Typography variant="h2" align="left" >{movie.Title}</Typography>
-            <Typography variant="body1" align="left" >Year: {movie.Year}</Typography>
+          <Box sx={{marginLeft: '-10rem',}}>
+          <Typography variant="h2" align="left"  sx={{fontWeight:900}}>{movie.Title}</Typography>
+          <Grid container spacing={1} sx={style.movie_info}>
+            <Grid item>
+              <Typography variant="body1">{movie.Year}  |</Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="body1">{movie.Runtime} |</Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="body1">{movie.Rated}</Typography>
+            </Grid>
+          </Grid>
+            
+
+          </Box>
+        </Grid>
+      </Grid>
+    </Card>
+  </Box>
+  );
+};
+
+export default Cards;
+
+/*
+
             <Typography variant="body1" align="left">IMDB Rating: {movie.imdbRating}</Typography>
+            <Divider orientation="vertical" flexItem  sx={{color:'red'}}/>
             <Typography variant="body1" align="left">Runtime: {movie.Runtime}</Typography>
             <Typography variant="body1" align="left">Genre: {movie.Genre}</Typography>
             <Typography variant="body1" align="left">Director: {movie.Director}</Typography>
@@ -109,12 +136,5 @@ function Cards() {
               precision={0.5}
               readOnly
             />
-          </Box>
-        </Grid>
-      </Grid>
-    </Card>
-  </Box>
-  );
-};
 
-export default Cards;
+*/
