@@ -1,4 +1,6 @@
-import React from 'react';
+import React from 'react'
+import { Link } from 'react-router-dom';
+
 import { AppBar, Box, Button, Toolbar, Typography, IconButton, MenuItem} from '@mui/material';
 import { Menu as ShowMenu} from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
@@ -63,10 +65,11 @@ const styles = {
 export default function Menu() {
   const theme = createTheme();
   const isXsScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
-
   const [anchorEl, setAnchorEl] = React.useState(null);
 
+
+
+  //Menu Show Button if on webpage but show menu icon if on smaller device.
   const handleClick = (event:any) => {
     setAnchorEl(event.currentTarget);
   };
@@ -74,8 +77,6 @@ export default function Menu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  console.log(isXsScreen)
   const renderMenuButton = () => {
     if (isXsScreen) {
       return (
@@ -91,17 +92,20 @@ export default function Menu() {
       );
     } else {
       return (
+        <>
         <Box sx={styles.button_box}>
-          <Button color="inherit" sx={styles.button}>
-            Home
-          </Button>
-          <Button color="inherit" sx={styles.button}>
+            <Button color="inherit" sx={styles.button} component={Link} to="/home">
+              Home
+            </Button>
+          <Button color="inherit" sx={styles.button} component={Link} to="/cards">
             Movies
           </Button>
-          <Button color="inherit" sx={styles.button}>
+          <Button color="inherit" sx={styles.button} component={Link} to="/imdb">
             IMDB
           </Button>
         </Box>
+        </>
+
       );
     }
   };
@@ -127,7 +131,7 @@ export default function Menu() {
           >
             <MenuItem onClick={handleClose} >
               <Button color="inherit" sx={{ ...styles.button, color: '#fff' }}>
-                Home
+              <Link to="/home">Home</Link>
               </Button>
             </MenuItem>
             <MenuItem onClick={handleClose} >

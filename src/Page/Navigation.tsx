@@ -1,5 +1,4 @@
 import {
-    BrowserRouter as Router,
     Routes,
     Route,
     Navigate,
@@ -8,10 +7,12 @@ import {
   import Home from './Home/Home'
   import Test from './Movie/Slider/LatestMovie'
   import MovieList from './Movie/Caategory'
+  import Menu from './Home/Menu';
 
   export default function App() {
     return (
-      <Router>
+      <>
+      <Menu/>
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/card/:id" element={< Cards/>} />
@@ -20,7 +21,7 @@ import {
           <Route path="/" element={<Navigate replace to="/home" />} />
           <Route path="*" element={<Navigate to ="/" />}/>
         </Routes>
-      </Router>
+      </>
     );
   }
   
