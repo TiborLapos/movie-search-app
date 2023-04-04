@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Box, Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography, Avatar } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
-import Api from '../../Api/Api';
+import Api from '../../../Api/Api';
 import '@fontsource/roboto';
 import { Button } from '@mui/material';
+
+
 
 //set velues for the Movie
 interface Movie {
@@ -20,12 +22,12 @@ interface Movie {
 //To change the stile
 const styles = {
   root_box_bacground: {
-    backgroundImage: `url(${require('../../img/background.jpg')})`,
+    backgroundImage: `url(${require('../../../img/background.jpg')})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
     position: 'relative',
-    height: { xs: '75vh', sm: 'calc(70vh - 64px)' },
+    height: { xs: '75vh', sm: 'calc(70vh - 64px)', md: 'calc(65vh - 64px)'},
     maxWidth: '100vw',
     overflow: 'hidden',
   },
@@ -71,6 +73,19 @@ const styles = {
     width:'120px',
     height:'38px',
   },
+  movies:{
+    marginTop: {
+      xs:1,
+    },
+    justifyContent: 'center',
+  },
+  movies_poster:{
+    width:'auto',
+    height:{
+      xs:'auto',
+      xl:'auto',
+    }
+  }
 };
 
 
@@ -78,9 +93,9 @@ const styles = {
 export default function LatestMovie() {
   const [latestMovie, setLatestMovie] = useState<Movie[] | null>(null);
 
-
   //Show the movies by IMDB ID and change evry 4000ms
   useEffect(() => {
+    console.log(`Screen Resolution: ${window.screen.width}x${window.screen.height}`)
     const ids = ['tt10366206', 'tt10151854', 'tt13345606', 'tt0111161'];
     let index = 0;
 
@@ -121,14 +136,14 @@ export default function LatestMovie() {
             transition={{ delay: 0.3, duration: 0.6 }}
             style={{ overflow: "hidden", position: "absolute"}}
           >
-            <Grid container spacing={3} sx={{ marginTop: 1, justifyContent: 'center' }}>
+            <Grid container spacing={3} sx={styles.movies}>
               <Grid item xs={12} sm={4}>
                 <Box sx={styles.box_photo}>
-                  <img
-                    src={movie.Poster}
-                    alt={`${movie.Title} poster`}
-                    style={{ maxWidth: '100%', height: 'auto' }}
-                  />
+                    <Avatar variant="square" 
+                      src={movie.Poster} 
+                      alt={`${movie.Title} poster`} 
+                      sx={styles.movies_poster}
+                      />
                 </Box>
               </Grid>
               <Grid item xs={12} sm={5}>

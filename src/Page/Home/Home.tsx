@@ -1,19 +1,15 @@
-import './Default.css';
-import Movie from '../Movie/Search_Movie'
-import LatestMovie from '../Movie/LatestMovie'
-import SearchBar from '../Movie/SearchBar';
+import Movie from '../Movie/Show_Movies/MoviesBox'
+import LatestMovie from '../Movie/Slider/LatestMovie'
+import SearchBar from '../Movie/Show_Movies/SearchBar';
 import React, { useState } from 'react';
 import Menu from './Menu';
 
 
 function Home() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("why");
   const handleSearch = (value:any) => {
     setSearchTerm(value);
   };
-
-
-
 
 
   return (

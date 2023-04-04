@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
-import API from '../../Api/Api';
+import API from '../../../Api/Api';
 
 interface SearchResult {
   imdbID: string;
@@ -37,17 +37,22 @@ function Movie({ searchTerm }: Props) {
     }
     setIsLoading(true);
     try {
-      const response = await axios.get(
-        `https://www.omdbapi.com/?apikey=${API.API_KEY}&s=${searchTerm}&type=movie`
-      );
-      const movies = await Promise.all(
-        response.data.Search.map(async (searchResult: SearchResult) => {
-          const plotResponse = await axios.get(
-            `https://www.omdbapi.com/?apikey=${API.API_KEY}&i=${searchResult.imdbID}&plot=short`
-          );
-          return { ...searchResult, Plot: plotResponse.data.Plot };
-        })
-      );
+      const movies = [];
+      for (let i = 1; i <= 2; i++) {
+        const response = await axios.get(
+          `https://www.omdbapi.com/?apikey=${API.API_KEY}&s=${searchTerm}&type=movie&page=${i}`
+        );
+        const moviesData = response.data.Search || [];
+        const moviesWithPlot = await Promise.all(
+          moviesData.map(async (searchResult: SearchResult) => {
+            const plotResponse = await axios.get(
+              `https://www.omdbapi.com/?apikey=${API.API_KEY}&i=${searchResult.imdbID}&plot=short&r=json`
+            );
+            return { ...searchResult, Plot: plotResponse.data.Plot };
+          })
+        );
+        movies.push(...moviesWithPlot);
+      }
       setSearchResults(movies);
       setIsLoading(false);
     } catch (error) {

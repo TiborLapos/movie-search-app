@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Movie_Search from '../Home/Home'
 import API from '../../Api/Api';
 
 
