@@ -129,15 +129,16 @@ function Movie({ searchTerm }: Props) {
                             sx={{ 
                                 width: '100%',
                                  height: 500,
-                                 objectFit: 'cover'
+                                 objectFit: 'cover',
+                                 borderRadius: '16px',
                                 }}
                             />
                         )}
                         <CardContent sx={{backgroundColor:'inherit', }}>
-                            <Typography  component="h1" sx={{textAlign:'left',height: 50, fontWeight:800}}>
+                            <Typography  component="h1" sx={{textAlign:'left', fontWeight:800}}>
                             {result.Title} - {result.Year}
                             </Typography>
-                            <Typography  component="p" noWrap sx={{textAlign:'left', width: 'auto',fontWeight:100, fontSize:14}}>
+                            <Typography  component="p" noWrap sx={{textAlign:'left', width: 'auto',fontWeight:100, fontSize:14, marginTop:2}}>
                             Year: {result.Year}
                             </Typography>
                             <Typography  component="p" noWrap sx={{ width: 'auto',height:50, fontWeight:100, fontSize:14}}>

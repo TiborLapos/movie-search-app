@@ -84,7 +84,8 @@ const styles = {
     height:{
       xs:'auto',
       xl:'auto',
-    }
+    },
+    borderRadius: '10px',
   }
 };
 
