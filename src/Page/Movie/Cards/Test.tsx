@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CardContent, Grid, Typography, Divider, Box } from '@mui/material';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const OverviewContent = (
   <Typography variant="body1">
@@ -31,12 +32,25 @@ const style = {
     fontSize: '20px',
     color: '#737373',
     textDecoration: 'none',
+    position: 'relative',
+    textTransform: 'uppercase'
   },
   activeText: {
     fontWeight: 200,
     fontSize: '20px',
-    color: 'red',
-    textDecoration: 'underline',
+    color: 'white',
+    textDecoration: 'none',
+    position: 'relative',
+    textTransform: 'uppercase'
+  },
+  underline: {
+    position: 'absolute',
+    bottom: '-10px',
+    left: '0',
+    width: '100%',
+    height: '5px',
+    backgroundColor: 'red',
+    transition: '0.2s',
   },
 };
 
@@ -45,7 +59,20 @@ const MovieCard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleContentChange = (content:any, index:any) => {
-    setSelectedContent(content);
+    setSelectedContent(
+      <AnimatePresence  mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.2 }}
+          style={{ overflow: "hidden" }}
+        >
+          {content}
+        </motion.div>
+      </AnimatePresence>
+    );
     setActiveIndex(index);
   };
 
@@ -59,6 +86,7 @@ const MovieCard = () => {
             onClick={() => handleContentChange(OverviewContent, 0)}
           >
             Overview
+            {activeIndex === 0 && <Box sx={style.underline} />}
           </Typography>
         </Grid>
         <Grid item sx={{ flexGrow: 1 }}>
@@ -68,6 +96,7 @@ const MovieCard = () => {
             onClick={() => handleContentChange(TrailerContent, 1)}
           >
             Trailer
+            {activeIndex === 1 && <Box sx={style.underline} />}
           </Typography>
         </Grid>
         <Grid item sx={{ flexGrow: 1 }}>
@@ -77,6 +106,7 @@ const MovieCard = () => {
             onClick={() => handleContentChange(MoreLikeThisContent, 2)}
           >
             More Like This
+            {activeIndex === 2 && <Box sx={style.underline} />}
           </Typography>
         </Grid>
         <Grid item sx={{ flexGrow: 1 }}>
@@ -86,11 +116,12 @@ const MovieCard = () => {
             onClick={() => handleContentChange(DetailsContent, 3)}
           >
             Details
+            {activeIndex === 3 && <Box sx={style.underline} />}
           </Typography>
         </Grid>
       </Grid>
       <Box sx={{ my: 1, width: 'auto' }}>
-        <Divider sx={{ backgroundColor: '#737373' }} />
+        <Divider sx={{ backgroundColor: '#737373',}} />
       </Box>
       <div style={{ marginTop: 16 }}>{selectedContent}</div>
     </CardContent>

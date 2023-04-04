@@ -5,6 +5,8 @@ import API from '../../../Api/Api';
 import '@fontsource/roboto'; // import the font
 import Test from './Test'
 import { color } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+
 
 interface SearchResult {
   imdbID: string;
@@ -93,13 +95,26 @@ function Cards() {
     justifyContent="center"
     sx={style.root}
     >
-    <Card sx={style.card_root}>
-      <CardMedia
-        component="img"
-        sx={style.image}
-        image={movie.Poster}
-        alt={movie.Title}
-      />
+      <Card sx={style.card_root}>
+      <motion.div
+            key={movie.imdbID}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+        <CardMedia
+          component="img"
+          sx={style.image}
+          image={movie.Poster}
+          alt={movie.Title}
+        />
+        </motion.div>
+        <motion.div
+            key={movie.imdbID}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
       <CardContent sx={{ marginLeft: '30px' }}>
         <Grid container direction="column" spacing={2}>
           <Grid item>
@@ -120,6 +135,7 @@ function Cards() {
            
         </Grid>
       </CardContent>
+      </motion.div>
     </Card>
   </Grid>
   );
