@@ -125,7 +125,6 @@ function Cards() {
  
   </div>;
   }
-  const rating = parseInt(movie.imdbRating);
 
   return (
     <>

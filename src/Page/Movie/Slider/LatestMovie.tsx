@@ -27,7 +27,7 @@ const styles = {
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
     position: 'relative',
-    height: { xs: '75vh', sm: 'calc(70vh - 64px)', md: 'calc(65vh)'},
+    height: { xs: '75vh', sm: 'calc(70vh - 64px)', md: 'calc(65vh - 64px)'},
     maxWidth: '100vw',
     overflow: 'hidden',
   },
@@ -42,6 +42,7 @@ const styles = {
     filter: 'blur(0.1px)',
     opacity: 0.9,
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
+
   },
   box_photo: {
     display: 'flex',
@@ -83,8 +84,7 @@ const styles = {
     height:{
       xs:'auto',
       xl:'auto',
-    },
-    borderRadius: '10px',
+    }
   }
 };
 
