@@ -1,6 +1,5 @@
 import { createTheme, Theme } from "@mui/material/styles";
 
-const theme: Theme = createTheme();
 
 export const style = {
     root_box_bacground: {
