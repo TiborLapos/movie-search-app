@@ -70,7 +70,7 @@ const style = {
     color: 'white',
   },
   image: {
-    height: { xs: "90%", md: "70vh" },
+    height: { xs: "90%", md: "75vh" },
     width: { xs: "100%", md: "auto" },
     objectFit: 'contain',
     borderRadius: {xs:'20px', md:'16px'},

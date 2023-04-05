@@ -28,7 +28,7 @@ const DetailsContent = (
 const style = {
   root:{
     marginLeft:{xs:"0px", md:"20px"},
-    marginTop:{xs:0, md:5}, 
+    marginTop:{xs:0, md:2}, 
     width:{xs:"auto", md:600},
     height:"50%",
     minHeight:{xs:"300px", md:'240px'}

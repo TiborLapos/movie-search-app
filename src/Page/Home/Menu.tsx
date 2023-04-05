@@ -38,7 +38,8 @@ const styles = {
     textShadow: '5px -2px 1px #7B032C',
   },
   appBar: {
-    backgroundColor: '#081b27',
+    backgroundColor: 'inherit', //old color: #081b27
+    boxShadow: 'none',
   },
   button: {
     color: '#fff',

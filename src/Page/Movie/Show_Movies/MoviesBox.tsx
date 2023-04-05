@@ -71,7 +71,7 @@ function Movie({ searchTerm }: Props) {
 
   const handleCardClick = (imdbID: string) => {
     console.log(imdbID);
-    navigate('/card/'+imdbID);
+    navigate('/movie/'+imdbID);
   };
 
   return (
