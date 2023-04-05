@@ -45,7 +45,10 @@ const style = {
     width: '100%',
     height: '100%',
     backgroundSize: 'cover',
+    backgroundRepeat: {ms:'no-repeat'},
+    backgroundPosition:{ md:'center center'},
     filter: 'blur(5px)',
+    backgroundColor:{xs:'#081b27',md:'#081b27'},
     '&::before': {
       content: '""',
       position: 'absolute',
@@ -55,7 +58,7 @@ const style = {
       height: '100%',
       blur:'(20px)',
       opacity:'1px',
-      background: 'rgba(0, 0, 0, 0.7)',
+      background: {xs:'rgba(0, 0, 0, 0.0)',md:'rgba(0, 0, 0, 0.7)'},
     },
   },
   card_root: {
@@ -109,7 +112,7 @@ function Cards() {
   }, [id]);
   console.log("Trailer"+movie?.Trailer);
 
-  if (!movie || !movie.Poster) {
+  if (!movie) {
     return <div
     style={{
       display: 'flex',
@@ -126,11 +129,7 @@ function Cards() {
 
   return (
     <>
-    <Backdrop open={true} sx={{...style.backdrop,backgroundImage: {xs:'none',md:`url(${movie.Poster}})`}}} />;
-
-    
-    
-   
+    <Backdrop open={true} sx={{...style.backdrop,backgroundImage: {xs:'none',md:`url(${movie.Poster}})`}}} />
   <Grid container justifyContent="center" sx={style.root}>
     <Card sx={style.card_root}>
 
@@ -145,16 +144,16 @@ function Cards() {
           <Grid container direction="column" spacing={2} >
             <Grid container spacing={1} justifyContent="space-between" >
               <Grid item sx={{...style.text_design_margin, width:{xs:"100%", md:"auto"}}}>
-                <Typography variant="h3" align="center" sx={{fontWeight: 900 , }}>
+                <Typography variant="h3"  sx={{fontWeight: 900 ,maxWidth:'500px', textAlign:{xs:'center', md:'left'}}}>
                   {movie.Title}
                 </Typography>
               </Grid>
-              <Grid item sx={{display: {xs:"block", md:'flex'}, alignItems: 'right', width:{xs:"100%", md:"auto"}}}>
-                <Typography variant="h3" sx={{...style.text_design_rating, textAlign:"right"}}>
-                  {movie.imdbRating}
-                <StarIcon sx={{ color: yellow[500], fontSize: 30 }} />
-                </Typography>
-              </Grid>
+                <Grid item sx={{ display: { xs: 'block', md: 'flex' }, alignItems: 'center', width: { xs: '100%', md: 'auto' }, justifyContent: { xs: 'center', md: 'flex-end' } }}>
+                    <Typography variant="h3" sx={{ ...style.text_design_rating, textAlign: 'right' }}>
+                        {movie.imdbRating}
+                        <StarIcon sx={{ color: yellow[500], fontSize: 30 }} />
+                    </Typography>
+                </Grid>
             </Grid>
 
             <Grid container spacing={1} sx={style.movie_info} >

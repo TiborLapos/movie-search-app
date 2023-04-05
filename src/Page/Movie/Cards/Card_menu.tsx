@@ -31,7 +31,7 @@ const style = {
     marginTop:{xs:0, md:5}, 
     width:{xs:"auto", md:600},
     height:"50%",
-    minHeight:"300px"
+    minHeight:{xs:"300px", md:'240px'}
   },
   text: {
     fontWeight: 200,
