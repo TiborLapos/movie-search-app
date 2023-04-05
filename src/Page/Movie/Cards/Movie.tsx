@@ -34,7 +34,7 @@ interface SearchResult {
 const style = {
   root: {
     height: '100vh',
-    marginTop: 5,
+    marginTop: 2,
     fontFamily: 'Roboto',
   },
   backdrop: {
@@ -48,7 +48,7 @@ const style = {
     backgroundRepeat: {ms:'no-repeat'},
     backgroundPosition:{ md:'center center'},
     filter: 'blur(5px)',
-    backgroundColor:{xs:'#081b27',md:'#081b27'},
+    backgroundColor:{xs:'#141414',md:'#141414'},
     '&::before': {
       content: '""',
       position: 'absolute',
@@ -129,17 +129,13 @@ function Cards() {
 
   return (
     <>
-    <Backdrop open={true} sx={{...style.backdrop,backgroundImage: {xs:'none',md:`url(${movie.Poster}})`}}} />
+  <Backdrop open={true} sx={{...style.backdrop,backgroundImage: {xs:'none',md:`url(${movie.Poster}})`}}} />
   <Grid container justifyContent="center" sx={style.root}>
     <Card sx={style.card_root}>
-
-        <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }} style={{ overflow: "hidden", position: "relative"}}
->
+        <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }} style={{ overflow: "hidden", position: "relative"}}>
           <CardMedia component="img" sx={style.image} image={movie.Poster} alt={movie.Title} />
         </motion.div>
-
-      <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}  transition={{ delay: 0.3, duration: 0.6 }} style={{ overflow: "hidden", position: "relative"}}
->
+      <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}  transition={{ delay: 0.3, duration: 0.6 }} style={{ overflow: "hidden", position: "relative"}}>
         <CardContent sx={style.cardcontainer_root}>
           <Grid container direction="column" spacing={2} >
             <Grid container spacing={1} justifyContent="space-between" >
@@ -155,7 +151,6 @@ function Cards() {
                     </Typography>
                 </Grid>
             </Grid>
-
             <Grid container spacing={1} sx={style.movie_info} >
                 <Grid item sx={style.text_design_margin}>
                   <Typography variant="body1">{movie.Year}  |</Typography>
@@ -167,16 +162,12 @@ function Cards() {
                   <Typography variant="body1">{movie.Rated}</Typography>
                 </Grid>
             </Grid>
-       
             <Grid>
               <Test Plot={movie.Plot} Trailer={movie.Trailer} Title={movie.Title} ID={movie.imdbID}/>
             </Grid>
-            
             <Box sx={style.text_design_margin}>
                 <Card_Detail  Actors={movie.Actors}  Director={movie.Director} Genre={movie.Genre}/>
               </Box>
-           
-
           </Grid>
         </CardContent>
       </motion.div>

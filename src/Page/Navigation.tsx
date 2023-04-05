@@ -8,6 +8,8 @@ import {
   import Menu from './Home/Menu';
   import Movie from './Movie/Cards/Movie'
   import { createTheme, ThemeProvider } from '@mui/material';
+  import ScrollToTop from './ScrollTop';
+
   const theme = createTheme({
     typography: {
       fontFamily: 'Roboto',
@@ -18,6 +20,7 @@ import {
     return (
       <>
       <ThemeProvider theme={theme}>
+        <ScrollToTop />
         <Menu/>
           <Routes>
             <Route path="/home" element={<Home />} />

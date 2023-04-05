@@ -27,7 +27,7 @@ const styles = {
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
     position: 'relative',
-    height: { xs: '75vh', sm: 'calc(70vh - 64px)', md: 'calc(65vh - 64px)'},
+    height: { xs: '75vh', sm: 'calc(70vh - 64px)', md: 'calc(65vh)'},
     maxWidth: '100vw',
     overflow: 'hidden',
   },
