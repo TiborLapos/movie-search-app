@@ -1,7 +1,7 @@
 export const style = {
     root_box_bacground: {
         position: 'relative',
-        background: { xs: 'rgba(0, 0, 0, 0.4)', md: 'rgba(0, 0, 0, 0.2)' },
+        background: {xs:'rgba(0, 0, 0, 0.0)',md:'rgba(0, 0, 0, 0.3)'},
         '&:before': {
             content: '""',
             position: 'absolute',
@@ -14,10 +14,11 @@ export const style = {
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center center',
             filter: 'blur(5px)',
-            backdropFilter: 'blur(5px)',
+            backdropFilter: 'blur(10px)',
             blur: '(20px)',
             opacity: '1px',
             zIndex: -1,
+            boxShadow: 'none'
         },
     },
     box_photo: {
