@@ -1,6 +1,3 @@
-import { createTheme, Theme } from "@mui/material/styles";
-
-
 export const style = {
     root_box_bacground: {
         backgroundImage: `url(${require('../../../../img/background.jpg')})`,

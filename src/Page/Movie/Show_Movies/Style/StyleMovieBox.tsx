@@ -1,6 +1,3 @@
-import { createTheme, Theme } from "@mui/material/styles";
-
-
 export const style = {
     root: {
         marginX: { xs: 'auto', sm: 'auto' },
