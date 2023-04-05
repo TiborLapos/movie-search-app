@@ -36,7 +36,7 @@ const style = {
   text: {
     fontWeight: 200,
     fontSize: '20px',
-    color: '#737373',
+    color: '#a6a6a6',
     textDecoration: 'none',
     position: 'relative',
     textTransform: 'uppercase'

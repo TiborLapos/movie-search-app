@@ -12,6 +12,7 @@ const styles = {
     flexGrow: 1,
     boxShadow: "none",
     border: "none",
+    zIndex: 2,
   },
   logo: {
     textAlign: 'center',

@@ -13,7 +13,7 @@ import { Box, Grid, Typography, Chip} from "@mui/material";
     },
     root:{
       width:"100%",
-      color: "#737373",
+      color: "#a6a6a6",
       fontSize: 18,
     }, 
     about:{

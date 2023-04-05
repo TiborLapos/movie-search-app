@@ -8,6 +8,8 @@ import { motion } from 'framer-motion';
 import { Star as StarIcon } from '@mui/icons-material';
 import { yellow } from '@mui/material/colors';
 import Card_Detail from './Card_Detail'
+import { Backdrop } from '@mui/material';
+
 
 
 
@@ -35,25 +37,26 @@ const style = {
     marginTop: 5,
     fontFamily: 'Roboto',
   },
-  root_box_bacground: {
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',
-    backgroundSize: 'cover',
-    position: 'relative',
-    height: "100vh",
-    maxWidth: '100vw',
-    overflow: 'hidden',
-  },
-  root_box__effect: {
-    position: 'absolute',
+  backdrop: {
+    position: 'fixed',
+    zIndex: -1,
     top: 0,
-    bottom: 0,
     left: 0,
-    right: 0,
-    zIndex: 0,
-    backdropFilter: 'blur(20px)',
-    opacity: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    width: '100%',
+    height: '100%',
+    backgroundSize: 'cover',
+    filter: 'blur(5px)',
+    '&::before': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      blur:'(20px)',
+      opacity:'1px',
+      background: 'rgba(0, 0, 0, 0.7)',
+    },
   },
   card_root: {
     display: 'flex',
@@ -74,11 +77,11 @@ const style = {
     marginTop: { xs: '5px', md: '0' },
   },
   movie_info: {
-    color: '#737373',
+    color: '#a6a6a6',
     marginTop: {xs:"-35px", md:'5px'},
   },
   cardcontainer_root:{
-    marginTop:{xs:"-55px", md:"0px"}
+    marginTop:{xs:"-5px", md:"0px"}
   },
   text_design_margin:{
     marginLeft:{xs:'30px'}
@@ -106,7 +109,7 @@ function Cards() {
   }, [id]);
   console.log("Trailer"+movie?.Trailer);
 
-  if (!movie) {
+  if (!movie || !movie.Poster) {
     return <div
     style={{
       display: 'flex',
@@ -122,17 +125,21 @@ function Cards() {
   const rating = parseInt(movie.imdbRating);
 
   return (
-    <Box sx={{...style.root_box_bacground,     backgroundImage: `url(${movie.Poster}})`,}} >
-    <Box sx={style.root_box__effect}/>
+    <>
+    <Backdrop open={true} sx={{...style.backdrop,backgroundImage: {xs:'none',md:`url(${movie.Poster}})`}}} />;
+
+    
+    
+   
   <Grid container justifyContent="center" sx={style.root}>
     <Card sx={style.card_root}>
 
-        <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}             style={{ overflow: "hidden", position: "relative"}}
+        <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }} style={{ overflow: "hidden", position: "relative"}}
 >
           <CardMedia component="img" sx={style.image} image={movie.Poster} alt={movie.Title} />
         </motion.div>
 
-      <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}  transition={{ delay: 0.3, duration: 0.6 }}             style={{ overflow: "hidden", position: "relative"}}
+      <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}  transition={{ delay: 0.3, duration: 0.6 }} style={{ overflow: "hidden", position: "relative"}}
 >
         <CardContent sx={style.cardcontainer_root}>
           <Grid container direction="column" spacing={2} >
@@ -177,7 +184,7 @@ function Cards() {
 
     </Card>
   </Grid>
-  </Box>
+  </>
   );
 };
 
