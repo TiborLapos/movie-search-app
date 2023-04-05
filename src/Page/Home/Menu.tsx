@@ -1,68 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
-import { AppBar, Box, Button, Toolbar, Typography, IconButton, MenuItem} from '@mui/material';
-import { Menu as ShowMenu} from '@mui/material';
+import { AppBar, Box, Button, Toolbar, Typography, IconButton, MenuItem } from '@mui/material';
+import { Menu as ShowMenu } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { useMediaQuery, createTheme } from '@mui/material';
+import { style } from './Style/StyleMenu'
 import '@fontsource/roboto';
 
-const styles = {
-  root: {
-    flexGrow: 1,
-    boxShadow: "none",
-    border: "none",
-    zIndex: 2,
-  },
-  logo: {
-    textAlign: 'center',
-    fontFamily: 'Roboto, sans-serif',
-    textTransform: 'uppercase',
-    color: '#fff',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logo_letter:{
-    fontWeight: 400,
-    fontSize: '1.5rem',
-    letterSpacing: '0.2rem',
-    marginLeft:5,
-  },
-  firstLetter: {
-    fontWeight: 800,
-    color: '#f44336',
-    fontSize: '2.5rem',
-  },
-  firstLetterShadow: {
-    textShadow: '5px -2px 1px #7B032C',
-  },
-  appBar: {
-    backgroundColor: 'inherit', //old color: #081b27
-    boxShadow: 'none',
-  },
-  button: {
-    color: '#fff',
-    margin: '0 0px',
-    fontWeight: 600,
-    textTransform: 'uppercase',
-    letterSpacing: '0.1rem',
-    fontSize: '0.9rem',
-  },
-  button_box: {
-    marginLeft: 10,
-    display: 'flex',
-    alignItems: 'center',
-  },
-  menuIcon: {
-    color: '#fff',
-    marginLeft: 'auto',
-  },
-  menuList: {
-    background: '#081b27',
-    color:'white',
-  },
-};
+
+
+
 
 export default function Menu() {
   const theme = createTheme();
@@ -70,9 +17,8 @@ export default function Menu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
 
-
   //Menu Show Button if on webpage but show menu icon if on smaller device.
-  const handleClick = (event:any) => {
+  const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -87,25 +33,25 @@ export default function Menu() {
           aria-controls="menu"
           aria-haspopup="true"
           onClick={handleClick}
-          sx={styles.menuIcon}
+          sx={style.menuIcon}
         >
-          <MenuIcon  />
+          <MenuIcon />
         </IconButton>
       );
     } else {
       return (
         <>
-        <Box sx={styles.button_box}>
-            <Button color="inherit" sx={styles.button} component={Link} to="/home">
+          <Box sx={style.button_box}>
+            <Button color="inherit" sx={style.button} component={Link} to="/home">
               Home
             </Button>
-          <Button color="inherit" sx={styles.button} component={Link} to="/cards">
-            Movies
-          </Button>
-          <Button color="inherit" sx={styles.button} component={Link} to="/imdb">
-            IMDB
-          </Button>
-        </Box>
+            <Button color="inherit" sx={style.button} component={Link} to="/cards">
+              Movies
+            </Button>
+            <Button color="inherit" sx={style.button} component={Link} to="/imdb">
+              IMDB
+            </Button>
+          </Box>
         </>
 
       );
@@ -113,14 +59,14 @@ export default function Menu() {
   };
 
   return (
-    <Box sx={styles.root} >
-      <AppBar position="static" sx={styles.appBar}>
+    <Box sx={style.root} >
+      <AppBar position="static" sx={style.appBar}>
         <Toolbar sx={{ justifyContent: 'center' }}>
-          <Typography variant="h5" textAlign="center" sx={styles.logo}>
-            <span style={styles.firstLetter}>
-              <span style={styles.firstLetterShadow}>M</span>
+          <Typography variant="h5" textAlign="center" sx={style.logo}>
+            <span style={style.firstLetter}>
+              <span style={style.firstLetterShadow}>M</span>
             </span>
-            <span style={styles.logo_letter}>ovie Website</span>
+            <span style={style.logo_letter}>ovie Website</span>
           </Typography>
           {renderMenuButton()}
           <ShowMenu
@@ -129,25 +75,24 @@ export default function Menu() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
             PaperProps={{ style: { backgroundColor: "#081b27" } }}
-            sx={{ "& .MuiList-root": styles.menuList }}
+            sx={{ "& .MuiList-root": style.menuList }}
           >
             <MenuItem onClick={handleClose} >
-              <Button color="inherit" sx={{ ...styles.button, color: '#fff' }}>
-              <Link to="/home">Home</Link>
+              <Button color="inherit" sx={{ ...style.button, color: '#fff' }}>
+                <Link to="/home">Home</Link>
               </Button>
             </MenuItem>
             <MenuItem onClick={handleClose} >
-              <Button color="inherit" sx={{ ...styles.button, color: '#fff' }}>
+              <Button color="inherit" sx={{ ...style.button, color: '#fff' }}>
                 Movies
               </Button>
             </MenuItem>
             <MenuItem onClick={handleClose} >
-              <Button color="inherit" sx={{ ...styles.button, color: '#fff' }}>
+              <Button color="inherit" sx={{ ...style.button, color: '#fff' }}>
                 IMDB
               </Button>
             </MenuItem>
           </ShowMenu>
-
         </Toolbar>
       </AppBar>
     </Box>

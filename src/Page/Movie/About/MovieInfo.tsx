@@ -1,39 +1,20 @@
-import { Box, Grid, Typography, Chip} from "@mui/material";
+import { Box, Grid, Typography, Chip } from "@mui/material";
+import { style } from './Style/StyleMovieDetail' //To edit the style
 
-
-
-
-  const style = {
-    chip_style:{
-      backgroundColor: "#1c3f5f",
-      color: "White",
-      padding: "0.4rem 1px",
-      marginRight: "8px",
-      textTransform: 'uppercase',
-    },
-    root:{
-      width:"100%",
-      color: "#a6a6a6",
-      fontSize: 18,
-    }, 
-    about:{
-      fontSize: 18,
-    }
-  };
 
 type MovieDetail = {
-    Actors: string;
-    Director:string;
-    Genre:string;
+  Actors: string;
+  Director: string;
+  Genre: string;
 
-  };
+};
 
 function MovieInfo({ Actors, Director, Genre }: MovieDetail) {
-    const genres = Genre.split(", "); // split genre string by comma and space
+  const genres = Genre.split(", "); // split genre string by comma and space
 
   return (
     <Box>
-      <Grid container spacing={1} sx={{marginBottom:2}}>
+      <Grid container spacing={1} sx={{ marginBottom: 2 }}>
         <Grid item>
           <Typography sx={style.root}>
             Straing:
@@ -45,7 +26,7 @@ function MovieInfo({ Actors, Director, Genre }: MovieDetail) {
           </Typography>
         </Grid>
       </Grid>
-      <Grid container spacing={1} sx={{marginBottom:2}}>
+      <Grid container spacing={1} sx={{ marginBottom: 2 }}>
         <Grid item>
           <Typography sx={style.root}>
             Created by:
@@ -57,7 +38,7 @@ function MovieInfo({ Actors, Director, Genre }: MovieDetail) {
           </Typography>
         </Grid>
       </Grid>
-    <Grid container spacing={1} sx={{marginBottom:2}} >
+      <Grid container spacing={1} sx={{ marginBottom: 2 }} >
         <Grid item>
           <Typography sx={style.root}>
             Genre:

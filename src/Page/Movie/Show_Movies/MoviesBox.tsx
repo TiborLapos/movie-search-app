@@ -9,6 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import API from '../../../Api/Api';
+import {style} from './Style/StyleMovieBox'
 
 interface SearchResult {
   imdbID: string;
@@ -17,7 +18,6 @@ interface SearchResult {
   Year: string;
   Plot: string;
 }
-
 
 
 interface Props {
@@ -29,7 +29,7 @@ function Movie({ searchTerm }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
- 
+
 
   const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     if (event) {
@@ -71,13 +71,13 @@ function Movie({ searchTerm }: Props) {
 
   const handleCardClick = (imdbID: string) => {
     console.log(imdbID);
-    navigate('/movie/'+imdbID);
+    navigate('/movie/' + imdbID);
   };
 
   return (
     <>
-     {isLoading ? (
-          <div
+      {isLoading ? (
+        <div
           style={{
             display: 'flex',
             justifyContent: 'center',
@@ -86,73 +86,63 @@ function Movie({ searchTerm }: Props) {
           }}
         >
           <CircularProgress color="primary" />
-       
         </div>
-        ) :(
-        <Grid container spacing={4} sx={{marginX: {xs:'auto',sm: 'auto'}, maxWidth: {xs:400, sm:400, md:800, lg:1100, xl:1400}, mt:0.5}} >
-                {  searchResults && searchResults.length === 0 ? (
-                    <Typography variant="h6" component="p" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', marginTop:5 }}>
-                      No results found...
-                    </Typography>
-                ) : (
-                    searchResults.map((result: any) => (
-                    <Grid item xs={11} sm={11} md={6} lg={4} xl={3} key={result.imdbID} sx={{justifyContent: 'center', marginTop:2}}>
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          whileHover={{
-                            scale: 1.05,
-                            transition: { duration: 0.5 },
-                          }}
-                          transition={{ delay: result.id * 0.2, duration: 0.5 }}
-                        >
-                        <Card sx={{ height: '100%',backgroundColor:'inherit', color:'white',boxShadow:0}} 
-                          onClick={() => (handleCardClick(result.imdbID)) }
-                          
-                        >
-                        {result.Poster === '' || result.Poster === 'N/A' ? (
-                            <CardMedia
-                            component="img"
-                            src="https://via.placeholder.com/500x500?text=No+Image+Found"
-                            title="No Image Found"
-                            sx={{ 
-                                width: '100%', 
-                                height: 500,
-                                objectFit: 'cover'
-                            }}
-                            />
-                        ) : (
-                            <CardMedia
-                            component="img"
-                            image={result.Poster}
-                            title={result.Title}
-                            sx={{ 
-                                width: '100%',
-                                 height: 500,
-                                 objectFit: 'cover',
-                                 borderRadius: '16px',
-                                }}
-                            />
-                        )}
-                        <CardContent sx={{backgroundColor:'inherit', }}>
-                            <Typography  component="h1" sx={{textAlign:'left', fontWeight:800}}>
-                            {result.Title} - {result.Year}
-                            </Typography>
-                            <Typography  component="p" noWrap sx={{textAlign:'left', width: 'auto',fontWeight:100, fontSize:14, marginTop:2}}>
-                            Year: {result.Year}
-                            </Typography>
-                            <Typography  component="p" noWrap sx={{ width: 'auto',height:50, fontWeight:100, fontSize:14}}>
-                            Plot: {result.Plot}
-                            </Typography>
-                        </CardContent>
-                        </Card>
-                        </motion.div>
-                    </Grid>
-                    ))
-                )}
-            </Grid>
-        )}
-     
+      ) : (
+        <Grid container spacing={4} sx={style.root} >
+          {searchResults && searchResults.length === 0 ? (
+            <Typography variant="h6" component="p" sx={style.not_found}>
+              No results found...
+            </Typography>
+          ) : (
+            searchResults.map((result: any) => (
+              <Grid item xs={11} sm={11} md={6} lg={4} xl={3} key={result.imdbID} sx={style.movie_grid}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  whileHover={{
+                    scale: 1.05,
+                    transition: { duration: 0.5 },
+                  }}
+                  transition={{ delay: result.id * 0.2, duration: 0.5 }}
+                >
+                  <Card sx={style.movie_card}
+                    onClick={() => (handleCardClick(result.imdbID))}
+
+                  >
+                    {result.Poster === '' || result.Poster === 'N/A' ? (
+                      <CardMedia
+                        component="img"
+                        src="https://via.placeholder.com/500x500?text=No+Image+Found"
+                        title="No Image Found"
+                        sx={style.movie_cardmedia}
+                      />
+                    ) : (
+                      <CardMedia
+                        component="img"
+                        image={result.Poster}
+                        title={result.Title}
+                        sx={style.movie_cardmedia}
+                      />
+                    )}
+                    <CardContent sx={{ backgroundColor: 'inherit', }}>
+                      <Typography component="h1" sx={{ textAlign: 'left', fontWeight: 800 }}>
+                        {result.Title} - {result.Year}
+                      </Typography>
+                      <Typography component="p" noWrap sx={{ textAlign: 'left', width: 'auto', fontWeight: 100, fontSize: 14, marginTop: 2 }}>
+                        Year: {result.Year}
+                      </Typography>
+                      <Typography component="p" noWrap sx={{ width: 'auto', height: 50, fontWeight: 100, fontSize: 14 }}>
+                        Plot: {result.Plot}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </Grid>
+            ))
+          )}
+        </Grid>
+      )}
+
     </>
   );
 }

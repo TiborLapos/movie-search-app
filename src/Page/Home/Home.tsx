@@ -6,19 +6,19 @@ import React, { useState } from 'react';
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState("why");
-  const handleSearch = (value:any) => {
+  const handleSearch = (value: any) => {
     setSearchTerm(value);
   };
 
 
   return (
     <>
-      <LatestMovie/>
-      <SearchBar onSearch={handleSearch} /> 
-      <Movie searchTerm={searchTerm}/>
+      <LatestMovie />
+      <SearchBar onSearch={handleSearch} />
+      <Movie searchTerm={searchTerm} />
     </>
   );
- 
+
 }
 
 export default Home;

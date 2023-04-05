@@ -1,38 +1,12 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import {Box} from '@mui/material';
+import { Box } from '@mui/material';
+import { style } from './Style/StyleSearchBar'
 
 interface Props {
   onSearch: (searchTerm: string) => void;
 }
 
-const styles = {
-  wrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: '0 auto',
-  },
-  searchbar:{
-        marginX: 'auto',
-        width: { xs: 350, md: 500 },
-        '& .MuiInputBase-input': { color: 'white' },
-        '& .MuiOutlinedInput-root': {
-          '& fieldset': {
-            borderColor: 'white',
-          },
-          '&:hover fieldset': {
-            borderColor: 'white',
-          },
-          '&.Mui-focused fieldset': {
-            borderColor: 'white',
-          },
-        },
-        marginTop:5,
-        alignItem:'center',
-    },
-
-  };
 
 const SearchBar: React.FC<Props> = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -52,23 +26,23 @@ const SearchBar: React.FC<Props> = ({ onSearch }) => {
   };
 
   return (
-      <Box sx={styles.wrapper}>
-        <form onSubmit={handleSubmit}>
-          <TextField
-            id="search"
-            label="Enter the Movie Title"
-            InputLabelProps={{
-              style: { color: 'white' },
-            }}
-            value={searchTerm}
-            className="my_textfield"
-            onChange={handleChange}
-            color="primary"
-            variant="outlined"
-            sx={styles.searchbar}
-          />
-        </form>
-      </Box>
+    <Box sx={style.wrapper}>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          id="search"
+          label="Enter the Movie Title"
+          InputLabelProps={{
+            style: { color: 'white' },
+          }}
+          value={searchTerm}
+          className="my_textfield"
+          onChange={handleChange}
+          color="primary"
+          variant="outlined"
+          sx={style.searchbar}
+        />
+      </form>
+    </Box>
   );
 };
 

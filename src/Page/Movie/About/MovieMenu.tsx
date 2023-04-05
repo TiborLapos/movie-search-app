@@ -1,84 +1,52 @@
 import { useState } from 'react';
 import { CardContent, Grid, Typography, Divider, Box } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
-import Card_MovieLikeThis from './Card_MovieLikeThis'
+import { style } from './Style/StyleMovieMenu' //<-- To change the style
+import Card_MovieLikeThis from './MovieLikeThis'
+
 
 const OverviewContent = ({ Plot }: { Plot: string }) => (
   <Typography variant="body1" >{Plot}</Typography>
 );
 
-const RelatedMovies = ({ Title,imdbID }: { Title: string,  imdbID: string }) =>  (
-  <Box sx={{marginTop:1}}>
-    <Card_MovieLikeThis Title={Title} ID={imdbID}/>
+const RelatedMovies = ({ Title, imdbID }: { Title: string, imdbID: string }) => (
+  <Box sx={{ marginTop: 1 }}>
+    <Card_MovieLikeThis Title={Title} ID={imdbID} />
   </Box>
 );
 
+/* To add more card use this and uncoment it and change the id value
 const MoreLikeThisContent = (
   <Typography variant="body1">
     This is the more like this content.
   </Typography>
 );
+*/
 
 const DetailsContent = (
   <Typography variant="body1">This is the details content.</Typography>
 );
 
 
-
-const style = {
-  root:{
-    marginLeft:{xs:"0px", md:"20px"},
-    marginTop:{xs:0, md:2}, 
-    width:{xs:"auto", md:600},
-    height:"50%",
-    minHeight:{xs:"300px", md:'240px'}
-  },
-  text: {
-    fontWeight: 200,
-    fontSize: '20px',
-    color: '#a6a6a6',
-    textDecoration: 'none',
-    position: 'relative',
-    textTransform: 'uppercase'
-  },
-  activeText: {
-    fontWeight: 200,
-    fontSize: '20px',
-    color: 'white',
-    textDecoration: 'none',
-    position: 'relative',
-    textTransform: 'uppercase'
-  },
-  underline: {
-    position: 'absolute',
-    bottom: '-10px',
-    left: '0',
-    width: '100%',
-    height: '5px',
-    backgroundColor: 'red',
-    transition: '0.2s',
-  },
+type MovieCardProps = {
+  Plot: string;
+  Trailer: string;
+  Title: string;
+  ID: string;
 };
 
-type MovieCardProps = {
-    Plot: string;
-    Trailer:string;
-    Title:string;
-    ID:string;
-  };
-  
 
-const MovieCard = ({ Plot, Trailer, Title, ID }: MovieCardProps) => {
-    const [selectedContent, setSelectedContent] = useState(
-        <OverviewContent Plot={Plot} />
-      );
-    const [activeIndex, setActiveIndex] = useState(0);
-  
+const MovieCard = ({ Plot, Title, ID }: MovieCardProps) => {
+  const [selectedContent, setSelectedContent] = useState(
+    <OverviewContent Plot={Plot} />
+  );
+  const [activeIndex, setActiveIndex] = useState(0);
 
 
-  const handleContentChange = (content:any, index:any) => {
+
+  const handleContentChange = (content: any, index: any) => {
     setSelectedContent(
-      <AnimatePresence  mode="wait">
+      <AnimatePresence mode="wait">
         <motion.div
           key={index}
           initial={{ opacity: 0, y: 20 }}
@@ -129,9 +97,9 @@ const MovieCard = ({ Plot, Trailer, Title, ID }: MovieCardProps) => {
         </Grid>
       </Grid>
       <Box sx={{ my: 1, width: 'auto' }}>
-        <Divider sx={{ backgroundColor: '#737373',}} />
+        <Divider sx={{ backgroundColor: '#737373', }} />
       </Box>
-      <div style={{ marginTop: 16}}>{selectedContent}</div>
+      <div style={{ marginTop: 16 }}>{selectedContent}</div>
     </CardContent>
   );
 };
