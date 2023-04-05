@@ -23,13 +23,14 @@ interface Movie {
 const styles = {
   root_box_bacground: {
     backgroundImage: `url(${require('../../../img/background.jpg')})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center center',
-    backgroundSize: 'cover',
     position: 'relative',
-    height: { xs: '75vh', sm: 'calc(70vh - 64px)', md: 'calc(65vh - 64px)'},
+    height: { xs: '75vh', sm: 'calc(70vh - 64px)', md: 'calc(60vh - 64px)'},
     maxWidth: '100vw',
     overflow: 'hidden',
+    backgroundSize: 'cover',
+    backgroundRepeat: {ms:'no-repeat'},
+    backgroundPosition:{ md:'center center'},
+    backgroundColor:{xs:'#141414',md:'#141414'},
   },
   root_box__effect: {
     position: 'absolute',
@@ -39,9 +40,9 @@ const styles = {
     right: 0,
     zIndex: 0,
     backdropFilter: 'blur(5px)',
-    filter: 'blur(0.1px)',
-    opacity: 0.9,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    blur:'(20px)',
+    opacity:'1px',
+    background: {xs:'rgba(0, 0, 0, 0.4)',md:'rgba(0, 0, 0, 0.5)'},
 
   },
   box_photo: {
@@ -79,13 +80,17 @@ const styles = {
     },
     justifyContent: 'center',
   },
-  movies_poster:{
-    width:'auto',
-    height:{
-      xs:'auto',
-      xl:'auto',
-    }
-  }
+  movies_poster: {
+    width: 'auto',
+    height: {
+      xs: 'auto',
+      xl: 'auto',
+    },
+    '@media (min-width:  2560px)': { // add another media rule for width
+      width: '100%',
+      height:'100%',
+    },
+  },
 };
 
 
