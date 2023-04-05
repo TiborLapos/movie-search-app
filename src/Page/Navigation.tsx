@@ -4,7 +4,6 @@ import {
   Navigate,
 } from 'react-router-dom';
 import Home from './Home/Home'
-import MovieList from './Movie/Caategory'
 import Menu from './Home/Menu';
 import Movie from './Movie/About/Movie'
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -24,7 +23,6 @@ export default function App() {
         <Menu />
         <Routes>
           <Route path="/home" element={<Home />} />
-          <Route path="/category" element={< MovieList />} />
           <Route path="/movie/:id" element={< Movie />} />
           <Route path="/" element={<Navigate replace to="/home" />} />
           <Route path="*" element={<Navigate to="/" />} />

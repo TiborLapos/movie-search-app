@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Box, CardMedia, Grid, Typography, Card, CardContent, CircularProgress, Container } from "@mui/material";
+import { Box, CardMedia, Grid, Typography, Card, CardContent, CircularProgress } from "@mui/material";
 import { motion } from 'framer-motion';
 import { Star as StarIcon } from '@mui/icons-material';
 import { yellow } from '@mui/material/colors';
@@ -8,7 +8,7 @@ import { Backdrop } from '@mui/material';
 import { style } from "./Style/StyleMovie"; //To edit the style
 import API from '../../../Api/Api';
 import Test from './MovieMenu'
-import Card_Detail from './MovieInfo'
+import MovieInfo from './MovieInfo'
 import '@fontsource/roboto'; // import the font
 
 
@@ -27,21 +27,35 @@ interface SearchResult {
   Actors: string;
   FullPlot: string;
   Trailer: string;
+  Type:string;
+  Source:string;
+  BoxOffice:string;
+  Production:string;
+  Website:string;
+  Awards:string;
 }
 
 function Movie() {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<SearchResult | null>(null);
-
+  
   useEffect(() => {
-    async function fetchMovie() {
-      const response = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=${API.API_KEY}&plot=full`);
+    async function FetchMovie() {
+      const response = await fetch(`https://www.omdbapi.com/?i=${id}&apikey=${API.API_KEY}&plot=full&h=high`);
       const data = await response.json();
-      setMovie(data);
+
+      //To get better poster resolution :D 
+      const posterUrl = data.Poster;
+      const highResPosterURL = posterUrl.replace('300', '1000');
+      console.log(highResPosterURL); // Output: "http://example.com/poster_1000.jpg"
+      const updatedData = Object.assign({}, data, { Poster: highResPosterURL });
+      setMovie(updatedData);
+
     }
-    fetchMovie();
+
+    FetchMovie();
   }, [id]);
-    console.log("Trailer" + movie?.Trailer);
+
 
   if (!movie) {
     return <div
@@ -61,7 +75,7 @@ function Movie() {
       <Backdrop open={true} sx={{ ...style.backdrop, backgroundImage: { xs: 'none', md: `url(${movie.Poster}})` } }} />
       <Grid container justifyContent="center" sx={style.root}>
         <Card sx={style.card_root}>
-          <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }} style={{ overflow: "hidden", position: "relative" }}>
+          <motion.div key={movie.Title} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }} style={{ overflow: "hidden", position: "relative" }}>
             <CardMedia component="img" sx={style.image} image={movie.Poster} alt={movie.Title} />
           </motion.div>
           <motion.div key={movie.imdbID} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }} style={{ overflow: "hidden", position: "relative" }}>
@@ -95,7 +109,7 @@ function Movie() {
                   <Test Plot={movie.Plot} Trailer={movie.Trailer} Title={movie.Title} ID={movie.imdbID} />
                 </Grid>
                 <Box sx={style.text_design_margin}>
-                  <Card_Detail Actors={movie.Actors} Director={movie.Director} Genre={movie.Genre} />
+                  <MovieInfo Actors={movie.Actors} Director={movie.Director} Genre={movie.Genre} />
                 </Box>
               </Grid>
             </CardContent>

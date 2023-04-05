@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Box, Container, Grid, Typography, Avatar } from '@mui/material';
-import { AnimatePresence, motion } from 'framer-motion';
+import { Box, Container, Grid, Typography, CardMedia } from '@mui/material';
 import Api from '../../../Api/Api';
 import '@fontsource/roboto';
 import { Button } from '@mui/material';
@@ -31,21 +30,30 @@ export default function LatestMovie() {
 
     async function fetchMovie() {
       const response = await fetch(
-        `https://www.omdbapi.com/?i=${ids[index]}&apikey=${Api.API_KEY}`
+        `https://www.omdbapi.com/?i=${ids[index]}&apikey=${Api.API_KEY}&h=high`
       );
       const data = await response.json();
-      setLatestMovie([data]);
+      const posterUrl = data.Poster;
+      const highResPosterUrl = posterUrl.replace('300', '1000');
+      const updatedData = Object.assign({}, data, { Poster: highResPosterUrl });
+      setLatestMovie([updatedData]);
     }
     fetchMovie();
     const timer = setInterval(() => {
       index = (index + 1) % ids.length;
-      fetch(`https://www.omdbapi.com/?i=${ids[index]}&apikey=${Api.API_KEY}`)
+      fetch(`https://www.omdbapi.com/?i=${ids[index]}&apikey=${Api.API_KEY}&h=high`)
         .then((response) => response.json())
-        .then((data) => setLatestMovie([data]));
+        .then((data) => {
+          const posterUrl = data.Poster;
+          const highResPosterUrl = posterUrl.replace('300', '1000');
+          const updatedData = Object.assign({}, data, { Poster: highResPosterUrl });
+          setLatestMovie([updatedData]);
+        });
     }, 4000);
 
     return () => clearInterval(timer);
   }, []);
+
 
   //If no movie than load
   if (!latestMovie) {
@@ -54,69 +62,53 @@ export default function LatestMovie() {
 
   return (
     <Box sx={style.root_box_bacground} >
-      <Box sx={style.root_box__effect} />
       <Container maxWidth="lg">
-        <AnimatePresence >
-          {latestMovie.map((movie: Movie) => (
-            <motion.div
-              key={movie.imdbID}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, transition: { duration: 0.5 } }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              style={{ overflow: "hidden", position: "absolute" }}
-            >
-              <Grid container spacing={3} sx={style.movies}>
-                <Grid item xs={12} sm={4}>
-                  <Box sx={style.box_photo}>
-                    <Avatar variant="square"
-                      src={movie.Poster}
-                      alt={`${movie.Title} poster`}
-                      sx={style.movies_poster}
-                    />
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={5}>
-                  <Box sx={{ ...style.box_text, maxWidth: '1000px' }}>
-                    <Typography variant="h4" gutterBottom sx={{ ...style.title, textAlign: { xs: 'center', sm: 'left' } }}>
-                      {movie.Title} ({movie.Year})
-                    </Typography>
-                    <Typography variant="subtitle1" gutterBottom sx={{ display: { xs: 'none', sm: 'block' } }}>
-                      <span style={{
-                        fontFamily: 'Roboto, sans-serif',
-                        fontSize: '1rem',
-                        letterSpacing: '0.1rem',
-                        fontWeight: 'bold'
-                      }}>Directed by: </span>{movie.Director}
-                    </Typography>
-                    <Typography variant="body1" gutterBottom sx={{ display: { xs: 'none', sm: 'block' } }}>
-                      <span style={{
-                        fontFamily: 'Roboto, sans-serif',
-                        fontSize: '1rem',
-                        letterSpacing: '0.1rem',
-                        fontWeight: 'bold'
-                      }}>Plot: </span>{movie.Plot}
-                    </Typography>
-                    <Typography variant="subtitle2" gutterBottom sx={{ display: { xs: 'none', sm: 'block' } }}>
-                      <span style={{
-                        fontFamily: 'Roboto, sans-serif',
-                        fontSize: '1rem',
-                        letterSpacing: '0.1rem',
-                        fontWeight: 'bold',
-                      }}
-                      >Starring: </span>{movie.Actors}
-                    </Typography>
-                    <Box sx={{ justifyContent: 'left', marginTop: '20px', display: { xs: 'none', sm: 'block' } }}>
-                      <Button variant="contained" sx={style.blueButton}>
-                        More
-                      </Button>
-                    </Box>
-                  </Box>
-                </Grid>
-              </Grid>
-            </motion.div>
-          ))}
-        </AnimatePresence>
+        {latestMovie.map((movie: Movie) => (
+          <Grid container spacing={3} sx={style.movies}>
+            <Grid item xs={12} sm={8} md={5}>
+              <Box sx={style.box_photo}>
+                  <CardMedia component="img" sx={{...style.image, borderRadius:'16px'}} image={movie.Poster} alt={movie.Title} />
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={7} >
+              <Box sx={{ ...style.box_text, maxWidth: '1000px' }}>
+                <Typography variant="h4" gutterBottom sx={{ ...style.title, textAlign: { xs: 'center', sm: 'left' } }}>
+                  {movie.Title} ({movie.Year})
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom sx={{ display: { xs: 'none', sm: 'block' } }}>
+                  <span style={{
+                    fontFamily: 'Roboto, sans-serif',
+                    fontSize: '1rem',
+                    letterSpacing: '0.1rem',
+                    fontWeight: 'bold'
+                  }}>Directed by: </span>{movie.Director}
+                </Typography>
+                <Typography variant="body1" gutterBottom sx={{ display: { xs: 'none', sm: 'block' } }}>
+                  <span style={{
+                    fontFamily: 'Roboto, sans-serif',
+                    fontSize: '1rem',
+                    letterSpacing: '0.1rem',
+                    fontWeight: 'bold'
+                  }}>Plot: </span>{movie.Plot}
+                </Typography>
+                <Typography variant="subtitle2" gutterBottom sx={{ display: { xs: 'none', sm: 'block' } }}>
+                  <span style={{
+                    fontFamily: 'Roboto, sans-serif',
+                    fontSize: '1rem',
+                    letterSpacing: '0.1rem',
+                    fontWeight: 'bold',
+                  }}
+                  >Starring: </span>{movie.Actors}
+                </Typography>
+                <Box sx={{ justifyContent: 'left', marginTop: '20px', display: { xs: 'none', sm: 'block' } }}>
+                  <Button variant="contained" sx={style.blueButton}>
+                    More
+                  </Button>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        ))}
       </Container>
     </Box>
 
